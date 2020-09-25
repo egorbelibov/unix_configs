@@ -1,0 +1,112 @@
+# A list of all built-in modifier and literal keywords can
+# be found at https://github.com/koekeishiya/skhd/issues/1
+
+# TODO: Focus display commands
+
+# Space commands
+## Create space, set index(last), change focus to space[index]
+ctrl + cmd - n : yabai -m space --create; and \
+		 set -l index (yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index'); and \
+                 yabai -m space --focus $index
+
+## Create space, set index(last), move window to space[index], change focus to space[index]
+shift + ctrl + cmd - n : yabai -m space --create; and \
+			 set -l index (yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index'); and \
+                 	 yabai -m window --space $index; and \
+                 	 yabai -m space --focus $index
+
+## Destroy current space, set index(last), change focus to index(last)
+ctrl + cmd - q : yabai -m space --destroy
+
+## Focus space
+alt - r : yabai -m space --focus recent
+alt - n : yabai -m space --focus next; or yabai -m space --focus first
+alt - p : yabai -m space --focus prev; or yabai -m space --focus last
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
+alt - 5 : yabai -m space --focus 5
+alt - 6 : yabai -m space --focus 6
+alt - 7 : yabai -m space --focus 7
+alt - 8 : yabai -m space --focus 8
+alt - 9 : yabai -m space --focus 9
+
+## Send window to desktop and follow focus
+ctrl - z : yabai -m window --space next; yabai -m space --focus next
+ctrl - 1 : yabai -m window --space  1; yabai -m space --focus 1
+ctrl - 2 : yabai -m window --space  2; yabai -m space --focus 2
+ctrl - 3 : yabai -m window --space  3; yabai -m space --focus 3
+ctrl - 4 : yabai -m window --space  4; yabai -m space --focus 4
+ctrl - 5 : yabai -m window --space  5; yabai -m space --focus 5
+ctrl - 6 : yabai -m window --space  6; yabai -m space --focus 6
+ctrl - 7 : yabai -m window --space  7; yabai -m space --focus 7
+ctrl - 8 : yabai -m window --space  8; yabai -m space --focus 8
+ctrl - 9 : yabai -m window --space  9; yabai -m space --focus 9
+
+# Window commands
+## Modify window tree
+alt - b : yabai -m space --balance
+
+# Toggle window border
+shift + alt - b : yabai -m window --toggle border
+
+## Flip the tree
+alt - m : yabai -m space --mirror x-axis
+shift + alt - m : yabai -m space --mirror y-axis
+
+## Modify space layout
+# alt - m : yabai -m space --layout bsp
+# shift + alt - m : yabai -m space --layout float
+
+## Focus window
+alt - r : yabai - m window --focus recent
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
+## Swap focused window
+shift + alt - h : yabai -m window --swap west
+shift + alt - j : yabai -m window --swap south
+shift + alt - k : yabai -m window --swap north
+shift + alt - l  : yabai -m window --swap east
+
+## Move managed window 
+ctrl + alt - h : yabai -m window --warp west
+ctrl + alt - j : yabai -m window --warp south
+ctrl + alt - k : yabai -m window --warp north
+ctrl + alt - l : yabai -m window --warp east
+
+## Add 10 to gap between windows
+# alt - a : yabai -m space --gap rel:+10
+# shift + alt - a : yabai -m space --gap rel:-10
+
+## Make floating window fill screen
+cmd + alt - up  : yabai -m window --grid 1:1:1:0:1:1
+
+## Make floating window fill some space
+cmd + alt - left : yabai -m window --grid 1:2:0:0:1:1
+cmd + alt - right  : yabai -m window --grid 1:2:1:0:1:1
+
+# control window size
+ctrl + alt - left : yabai -m window --resize left:-60:0
+ctrl + alt - right : yabai -m window --resize left:60:0
+ctrl + alt - up : yabai -m window --resize top:0:-60
+ctrl + alt - down : yabai -m window --resize top:0:60
+
+# Toggle window zoom
+# alt - d : yabai -m window --toggle zoom-parent (same as next?)
+alt - f : yabai -m window --toggle zoom-fullscreen
+
+# Toggle window split type
+alt - e : yabai -m window --toggle split
+
+# Float / unfloat window and center on screen
+alt - t : yabai -m window --toggle float;\
+           yabai -m window --grid 4:4:1:1:2:2
+
+# Toggle sticky(+float), topmost, picture-in-picture
+alt - s : yabai -m window --toggle sticky;\
+          yabai -m window --toggle topmost;\
+          yabai -m window --toggle pip
