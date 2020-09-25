@@ -146,7 +146,9 @@
  ;;ocaml                ; an objective camel
  (org                   ; organize your plain life in plain text
   +pandoc               ; export-with-pandoc support
-  +present)             ; for neat presentations
+  +present              ; for neat presentations
+  +roam                 ; p wander around notes
+  +journal)             ; for roam fleeting notes
  ;;php                  ; perl's insecure younger brother
  ;;plantuml             ; diagrams for confusing people more
  ;; purescript          ; javascript, but functional

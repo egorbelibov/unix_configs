@@ -92,6 +92,14 @@
 
 (setq projectile-project-search-path '("~/main/"))
 
+(setq org-roam-directory "~/main/egorbelibov/data/braindump")
+
+(after! org-journal
+  (setq org-journal-date-prefix "#+TITLE: "
+        org-journal-date-format "%a %d/%m/%y (%j)"
+        org-journal-file-format "%Y-%m-%d.org"
+        org-journal-dir (file-truename "~/main/egorbelibov/data/braindump/private")))
+
 (setq org-directory "~/.org"
       org-log-done 'time
       org-export-in-background t

@@ -308,6 +308,23 @@ All about those projects.
 (setq projectile-project-search-path '("~/main/"))
 #+END_SRC
 
+*** Org-Roam
+The thinking process.
+#+BEGIN_SRC emacs-lisp
+(setq org-roam-directory "~/main/egorbelibov/data/braindump")
+#+END_SRC
+
+*** Org-Journal
+The evaluation process.
+#+BEGIN_SRC emacs-lisp
+(after! org-journal
+  (setq org-journal-date-prefix "#+TITLE: "
+        org-journal-date-format "%a %d/%m/%y (%j)"
+        org-journal-file-format "%Y-%m-%d.org"
+        org-journal-dir (file-truename "~/main/egorbelibov/data/braindump/private")))
+#+END_SRC
+
+
 ** Language Configuration
 Talk is cheap. Show me the code.
 
@@ -319,3 +336,4 @@ Talk is cheap. Show me the code.
       org-export-in-background t
       org-catch-invisible-edits 'smart)
 #+END_SRC
+
