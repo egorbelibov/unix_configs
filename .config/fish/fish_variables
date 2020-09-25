@@ -1,8 +1,5 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR EDITOR:nvim
-SETUVAR --export GPG_TTY:not\x20a\x20tty
-SETUVAR --path PATH:/Users/65676f72/\x2eemacs\x2ed/bin\x1e/usr/local/bin\x1e/Users/65676f72/\x2eemacs\x2ed/bin\x1e/usr/bin\x1e/Users/65676f72/\x2eemacs\x2ed/bin\x1e/bin\x1e/Users/65676f72/\x2eemacs\x2ed/bin\x1e/usr/sbin\x1e/Users/65676f72/\x2eemacs\x2ed/bin\x1e/sbin
 SETUVAR __fish_initialized:3100
 SETUVAR fish_color_autosuggestion:normal
 SETUVAR fish_color_cancel:normal
@@ -29,7 +26,7 @@ SETUVAR fish_color_user:normal
 SETUVAR fish_color_valid_path:normal
 SETUVAR fish_greeting:Welcome\x20to\x20fish\x2c\x20the\x20friendly\x20interactive\x20shell\x0aType\x20\x60help\x60\x20for\x20instructions\x20on\x20how\x20to\x20use\x20fish
 SETUVAR fish_key_bindings:fish_vi_key_bindings
-SETUVAR fish_pager_color_completion:normal
+SETUVAR fish_pager_color_completion:\x1d
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
