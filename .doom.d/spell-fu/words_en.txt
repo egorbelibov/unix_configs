@@ -4721,6 +4721,7 @@ apes
 apex
 apex's
 apexes
+Apfelmus
 aphasia
 aphasia's
 aphasic
@@ -5449,6 +5450,8 @@ area
 area's
 areal
 areas
+AreEqual
+aren
 aren't
 arena
 arena's
@@ -8800,6 +8803,7 @@ bashing
 bashing's
 Basho
 Basho's
+bashrc
 BASIC
 basic
 BASIC's
@@ -13163,6 +13167,7 @@ brainchild
 brainchild's
 brainchildren
 brainchildren's
+braindump
 brained
 brainier
 brainiest
@@ -23155,6 +23160,7 @@ confides
 confiding
 confidingly
 config
+configs
 configurable
 configuration
 configuration's
@@ -33622,6 +33628,7 @@ doter
 doter's
 doters
 dotes
+dotfiles
 doth
 doting
 dotingly
@@ -56853,6 +56860,7 @@ iniquitous
 iniquitously
 iniquity
 iniquity's
+init
 initial
 initial's
 initialed
@@ -71408,6 +71416,7 @@ mizzenmasts
 mizzens
 Mk
 mkay
+mkdir
 mks
 ml
 Mlle
@@ -76622,6 +76631,7 @@ nuzzling
 NV
 NVIDIA
 NVIDIA's
+nvim
 NW
 NW's
 NWT
@@ -96559,6 +96569,7 @@ RSFSR
 RSI
 RSV
 RSVP
+rsync
 rt
 Rte
 rte
@@ -101876,6 +101887,7 @@ showstopper's
 showstoppers
 showstopping
 showtime
+showUntrackedFiles
 showy
 shpt
 shrank
@@ -108889,6 +108901,7 @@ sublet
 sublet's
 sublets
 subletting
+sublicense
 sublieutenant
 sublieutenants
 sublimate
@@ -114330,6 +114343,7 @@ TM
 Tm
 Tm's
 tmp
+tmpdotfiles
 TN
 tn
 tnpk
@@ -116539,6 +116553,7 @@ trued
 truelove
 truelove's
 trueloves
+truename
 truer
 trues
 truest
@@ -117482,6 +117497,7 @@ UBS
 UBS's
 Ubuntu
 Ubuntu's
+uc
 Ucayali
 Ucayali's
 Uccello
@@ -119200,6 +119216,7 @@ unprofessional
 unprofessionally
 unprofitable
 unprofitably
+unprogrammed
 unpromising
 unprompted
 unpronounceable
@@ -120081,6 +120098,7 @@ USN
 USO
 USP
 USPS
+usr
 USS
 USSR
 USSR's
