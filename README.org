@@ -1,0 +1,49 @@
+#+TITLE: unix_configs
+
+#+BEGIN_QUOTE
+Enlightenment is the unprogrammed state.
+#+END_QUOTE
+
+These are not meant for you. Exploit them at your own risk.
+
+** Setup (New Device)
+#+BEGIN_SRC fish
+git clone --separate-git-dir=$HOME/.unix_configs git@github.com:egorbelibov/unix_configs.git ~
+#+END_SRC
+
+This might fail if git finds an existing config file in your $HOME. In that case, a simple
+solution is to clone to a temporary directory, and then delete it once you are done:
+#+BEGIN_SRC fish
+git clone --separate-git-dir=$HOME/.unix_configs git@github.com:egorbelibov/unix_configs.git tmp_unix_configs
+rsync --recursive --verbose --exclude '.git' tmp_unix_configs/ $HOME/
+rm -r tmp_unix_configs
+#+END_SRC
+
+** Core Idea
+The key idea is simple - make ~$HOME~ the git ~work-tree~.
+Simply create a dummy folder and initialize a ~--bare~ repository.
+
+*** Initial Setup
+#+BEGIN_SRC fish
+mkdir $HOME/.unix_configs
+git init --bare $HOME/.unix_configs
+#+END_SRC
+
+Make an alias for running git commands in the ~.unix_configs~ repository repository.
+#+BEGIN_SRC fish
+# add to config.fish or .bashrc
+alias unix_configs='/usr/bin/git --git-dir=$HOME/.unix_configs/ --work-tree=$HOME'
+#+END_SRC
+
+Add ~remote~ and disable ~showUntrackedFiles~
+#+BEGIN_SRC fish
+unix_configs config --local status.showUntrackedFiles no
+unix_configs remote add origin git@github.com:egorbelibov/unix_configs.git
+#+END_SRC
+
+Ta-da! That's it. Now just add all your goodies in there.
+#+BEGIN_SRC fish
+unix_configs add .bashrc
+unix_configs commit -m "Add .bashrc"
+unix_configs push
+#+END_SRC
