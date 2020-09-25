@@ -269,6 +269,7 @@ Also, improve ~company~ (related) memory.
 #+END_SRC
 
 *** Spell-Fu
+All words are important. No words are important. Just words.
 #+BEGIN_SRC emacs-lisp
 (setq spell-fu-directory "~/.doom.d/spell-fu")
 #+END_SRC
