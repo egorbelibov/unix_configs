@@ -31574,6 +31574,7 @@ directorships
 directory
 directory's
 directs
+dired
 direful
 direly
 direr
@@ -35816,6 +35817,7 @@ ekes
 EKG
 EKG's
 eking
+el
 elaborate
 elaborated
 elaborately
@@ -84890,6 +84892,7 @@ pneumococci
 pneumococcus
 pneumonia
 pneumonia's
+png
 PO
 Po
 Po's
@@ -86819,6 +86822,7 @@ preppiest
 prepping
 preppy
 preppy's
+preprocessors
 preps
 prepubescence
 prepubescence's
