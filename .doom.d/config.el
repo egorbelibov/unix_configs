@@ -91,6 +91,7 @@
 (after! evil (evil-escape-mode nil))
 
 (add-hook 'dired-mode-hook 'org-download-enable)
+(setq org-download-image-dir "~/main/egorbelibov/assets/roam/download")
 
 (setq projectile-project-search-path '("~/main/"))
 

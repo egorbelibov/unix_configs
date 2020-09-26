@@ -306,6 +306,7 @@ So there's this one package called ~evil-escape~. Here's the thing, I don't use 
 *** Org-Download
 #+BEGIN_SRC emacs-lisp
 (add-hook 'dired-mode-hook 'org-download-enable)
+(setq org-download-image-dir "~/main/egorbelibov/assets/roam/download")
 #+END_SRC
 
 *** Projectile
@@ -330,7 +331,6 @@ The evaluation process.
         org-journal-dir (file-truename "~/main/egorbelibov/data/braindump/private")))
 #+END_SRC
 
-
 ** Language Configuration
 Talk is cheap. Show me the code.
 
@@ -342,4 +342,3 @@ Talk is cheap. Show me the code.
       org-export-in-background t
       org-catch-invisible-edits 'smart)
 #+END_SRC
-
