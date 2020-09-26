@@ -303,6 +303,11 @@ So there's this one package called ~evil-escape~. Here's the thing, I don't use 
 (after! evil (evil-escape-mode nil))
 #+END_SRC
 
+*** Org-Download
+#+BEGIN_SRC emacs-lisp
+(add-hook 'dired-mode-hook 'org-download-enable)
+#+END_SRC
+
 *** Projectile
 All about those projects.
 #+BEGIN_SRC emacs-lisp

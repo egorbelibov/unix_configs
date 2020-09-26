@@ -145,6 +145,7 @@
  ;;nix                  ; I hereby declare "nix geht mehr!"
  ;;ocaml                ; an objective camel
  (org                   ; organize your plain life in plain text
+  +dragndrop            ; drag & drop files/images into org buffers
   +pandoc               ; export-with-pandoc support
   +present              ; for neat presentations
   +roam                 ; p wander around notes

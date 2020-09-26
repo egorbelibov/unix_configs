@@ -90,6 +90,8 @@
 
 (after! evil (evil-escape-mode nil))
 
+(add-hook 'dired-mode-hook 'org-download-enable)
+
 (setq projectile-project-search-path '("~/main/"))
 
 (setq org-roam-directory "~/main/egorbelibov/data/braindump")
