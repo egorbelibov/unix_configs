@@ -66,6 +66,25 @@ New buffers should be, by default, opened in ~org-mode~, cause ~org-mode~.
 (setq-default major-mode 'org-mode)
 #+END_SRC
 
+*** Performance Boosters
+Let's put some thrusters on the back of this "Roadster".
+
+Emacs has the capability to display ~left-to-right~ and ~right-to-left~ languages at the
+same time in the same buffer. I don't need it. Because it adds to the amount of line scans
+that Emacs has to do to render a line, here are some changes.
+#+BEGIN_SRC emacs-lisp
+(setq-default bidi-paragraph-direction 'left-to-right)
+#+END_SRC
+
+When the lines in a file are so long that performance could suffer to an unacceptable
+degree, the following invokes something much more basic.
+#+BEGIN_SRC emacs-lisp
+(global-so-long-mode 1)
+#+END_SRC
+
+-----
+*NOTE*: You can test and evaluate performance with ~profiler-start~ and ~profiler-stop~.
+
 ** User Interface
 *** Font Face
 The *ultimate* font for hackers.

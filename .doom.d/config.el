@@ -30,6 +30,10 @@
 
 (setq-default major-mode 'org-mode)
 
+(setq-default bidi-paragraph-direction 'left-to-right)
+
+(global-so-long-mode 1)
+
 (setq
  doom-font (font-spec :family "Hack" :size 12)
  doom-big-font (font-spec :family "Hack" :size 16)
