@@ -260,6 +260,11 @@ Every one needs to jump around dumbly from time to time, right?
 (package! dumb-jump)
 #+END_SRC
 
+**** Language Support
+#+BEGIN_SRC emacs-lisp
+(package! svelte-mode)
+#+END_SRC
+
 ** Package Configuration
 #+BEGIN_QUOTE
 Another famous fluctuation that programs you is the exact configuration of your DNA.
