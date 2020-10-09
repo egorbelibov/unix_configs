@@ -35,8 +35,6 @@ Quite personal matters, hence no further comments.
  editorconfig-mode 1
  evil-want-fine-undo t
  fill-column 100
- global-hl-line-mode nil
- hl-line-mode nil
  help-window-select t
  indent-tabs-mode nil
  tab-width 4)
@@ -260,9 +258,22 @@ Every one needs to jump around dumbly from time to time, right?
 (package! dumb-jump)
 #+END_SRC
 
+For indentation. Specially useful for nim.
+#+BEGIN_SRC emacs-lisp
+(package! indent-guide)
+#+END_SRC
+
 **** Language Support
+If it ain't useful and fast, why bother?
+
+Svelte, the love of my life.
 #+BEGIN_SRC emacs-lisp
 (package! svelte-mode)
+#+END_SRC
+
+What? You don't know about nim? You should try it.
+#+BEGIN_SRC emacs-lisp
+(package! nim-mode)
 #+END_SRC
 
 ** Package Configuration
@@ -327,6 +338,11 @@ So there's this one package called ~evil-escape~. Here's the thing, I don't use 
 (after! evil (evil-escape-mode nil))
 #+END_SRC
 
+*** Indent-Guide
+#+BEGIN_SRC emacs-lisp
+(indent-guide-global-mode)
+#+END_SRC
+
 *** Org-Download
 #+BEGIN_SRC emacs-lisp
 (add-hook 'dired-mode-hook 'org-download-enable)
@@ -365,4 +381,14 @@ Talk is cheap. Show me the code.
       org-log-done 'time
       org-export-in-background t
       org-catch-invisible-edits 'smart)
+#+END_SRC
+
+** IRC Circe Config
+#+BEGIN_SRC emacs-lisp
+(setq circe-network-options
+      '(("Freenode"
+         :nick "egorbelibov"
+         :sasl-username "egorbelibov"
+         :channels ("#nim")
+         )))
 #+END_SRC
