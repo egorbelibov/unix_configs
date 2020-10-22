@@ -1,53 +1,49 @@
 ;; -*- no-byte-compile: t; -*-
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*All The Fun][All The Fun:1]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*All The Fun][All The Fun:1]]
 (package! selectric-mode)
 ;; All The Fun:1 ends here
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*All The Fun][All The Fun:2]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*All The Fun][All The Fun:2]]
 (package! spray)
 ;; All The Fun:2 ends here
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*All The Fun][All The Fun:3]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*All The Fun][All The Fun:3]]
 (package! speed-type)
 ;; All The Fun:3 ends here
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*Convenient][Convenient:1]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*Convenient][Convenient:1]]
 (package! org-pandoc-import
   :recipe (:host github
            :repo "tecosaur/org-pandoc-import"
            :files ("*.el" "filters" "preprocessors")))
 ;; Convenient:1 ends here
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*Convenient][Convenient:2]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*Convenient][Convenient:2]]
 (use-package! org-pandoc-import
   :after org)
 ;; Convenient:2 ends here
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*Convenient][Convenient:3]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*Convenient][Convenient:3]]
 (package! multi-term)
 ;; Convenient:3 ends here
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*Convenient][Convenient:4]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*Convenient][Convenient:4]]
 (package! disable-mouse)
 ;; Convenient:4 ends here
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*Convenient][Convenient:5]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*Convenient][Convenient:5]]
 (package! command-log-mode)
 ;; Convenient:5 ends here
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*Convenient][Convenient:6]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*Convenient][Convenient:6]]
 (package! dumb-jump)
 ;; Convenient:6 ends here
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*Convenient][Convenient:7]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*Convenient][Convenient:7]]
 (package! indent-guide)
 ;; Convenient:7 ends here
 
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*Language Support][Language Support:1]]
+;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.WSa9yd::*Language Support][Language Support:1]]
 (package! svelte-mode)
 ;; Language Support:1 ends here
-
-;; [[file:/var/folders/xp/l09f9_nx3zg1vnq87yj1rycr0000gn/T/config.org.xM8dwB::*Language Support][Language Support:2]]
-(package! nim-mode)
-;; Language Support:2 ends here

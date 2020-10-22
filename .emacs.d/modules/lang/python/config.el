@@ -181,7 +181,7 @@
 
 
 (use-package! python-pytest
-  :defer t
+  :commands python-pytest-dispatch
   :init
   (map! :after python
         :localleader
@@ -192,7 +192,7 @@
         "t" #'python-pytest-function-dwim
         "T" #'python-pytest-function
         "r" #'python-pytest-repeat
-        "p" #'python-pytest-popup))
+        "p" #'python-pytest-dispatch))
 
 
 ;;
@@ -266,6 +266,7 @@
                                 "~/.miniconda3"
                                 "~/anaconda3"
                                 "~/miniconda3"
+                                "~/opt/miniconda3"
                                 "/usr/bin/anaconda3"
                                 "/usr/local/anaconda3"
                                 "/usr/local/miniconda3"

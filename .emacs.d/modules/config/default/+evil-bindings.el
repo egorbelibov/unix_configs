@@ -68,9 +68,10 @@
       (:after geiser-doc :map geiser-doc-mode-map
        :n "o"    #'link-hint-open-link)
 
-      (:after (evil-org evil-easymotion)
-       :map evil-org-mode-map
-       :m "gsh" #'+org/goto-visible)
+      (:unless (featurep! :input layout +bepo)
+        (:after (evil-org evil-easymotion)
+         :map evil-org-mode-map
+         :m "gsh" #'+org/goto-visible))
 
       (:when (featurep! :editor multiple-cursors)
        :prefix "gz"
@@ -274,6 +275,7 @@
             ((featurep! :completion helm)  #'helm-resume))
 
       :desc "Search for symbol in project" "*" #'+default/search-project-for-symbol-at-point
+      :desc "Search project"               "/" #'+default/search-project
 
       :desc "Find file in project"  "SPC"  #'projectile-find-file
       :desc "Jump to bookmark"      "RET"  #'bookmark-jump
@@ -451,6 +453,7 @@
 
       ;;; <leader> i --- insert
       (:prefix-map ("i" . "insert")
+       :desc "Emoji"                         "e"   #'emojify-insert-emoji
        :desc "Current file name"             "f"   #'+default/insert-file-path
        :desc "Current file path"             "F"   (cmd!! #'+default/insert-file-path t)
        :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
@@ -505,8 +508,9 @@
 
        (:when (featurep! :lang org +journal)
         (:prefix ("j" . "journal")
-         :desc "New Entry"      "j" #'org-journal-new-entry
-         :desc "Search Forever" "s" #'org-journal-search-forever)))
+         :desc "New Entry"           "j" #'org-journal-new-entry
+         :desc "New Scheduled Entry" "J" #'org-journal-new-scheduled-entry
+         :desc "Search Forever"      "s" #'org-journal-search-forever)))
 
       ;;; <leader> o --- open
       (:prefix-map ("o" . "open")
@@ -647,6 +651,8 @@
       ;;; <leader> t --- toggle
       (:prefix-map ("t" . "toggle")
        :desc "Big mode"                     "b" #'doom-big-font-mode
+       (:when (featurep! :ui fill-column)
+        :desc "Fill Column Indicator"       "c" #'+fill-column/toggle)
        :desc "Flymake"                      "f" #'flymake-mode
        (:when (featurep! :checkers syntax)
         :desc "Flycheck"                   "f" #'flycheck-mode)

@@ -271,11 +271,6 @@ Svelte, the love of my life.
 (package! svelte-mode)
 #+END_SRC
 
-What? You don't know about nim? You should try it.
-#+BEGIN_SRC emacs-lisp
-(package! nim-mode)
-#+END_SRC
-
 ** Package Configuration
 #+BEGIN_QUOTE
 Another famous fluctuation that programs you is the exact configuration of your DNA.

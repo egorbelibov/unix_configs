@@ -49,8 +49,9 @@ symbol and CDR is the value to set it to when `doom-debug-mode' is activated.")
             ((if (boundp var)
                  (set-default var enabled)
                (add-to-list 'doom--debug-vars-undefined var)))))
-    (when (fboundp 'explain-pause-mode)
-      (explain-pause-mode enabled))
+    (when (called-interactively-p 'any)
+      (when (fboundp 'explain-pause-mode)
+        (explain-pause-mode (if enabled +1 -1))))
     ;; Watch for changes in `doom-debug-variables', or when packages load (and
     ;; potentially define one of `doom-debug-variables'), in case some of them
     ;; aren't defined when `doom-debug-mode' is first loaded.
@@ -211,16 +212,12 @@ branch and commit."
 
 ;;;###autoload
 (defun doom/info (&optional raw)
-  "Collects some debug information about your Emacs session, formats it into
-markdown and copies it to your clipboard, ready to be pasted into bug reports!"
+  "Collects some debug information about your Emacs session, formats it and
+copies it to your clipboard, ready to be pasted into bug reports!"
   (interactive "P")
-  (let ((buffer (get-buffer-create "*doom-info*"))
+  (let ((buffer (get-buffer-create "*doom info*"))
         (info (doom-info)))
     (with-current-buffer buffer
-      (or (not doom-interactive-p)
-          (eq major-mode 'markdown-mode)
-          (not (fboundp 'markdown-mode))
-          (markdown-mode))
       (erase-buffer)
       (if raw
           (progn
@@ -234,7 +231,7 @@ markdown and copies it to your clipboard, ready to be pasted into bug reports!"
                   (let ((sexp (prin1-to-string (sexp-at-point))))
                     (delete-region beg end)
                     (insert sexp))))))
-        (insert "<details>\n\n```\n")
+        (insert "```\n")
         (dolist (group info)
           (insert! "%-8s%-10s %s\n"
                    ((upcase (symbol-name (car group)))
@@ -243,12 +240,12 @@ markdown and copies it to your clipboard, ready to be pasted into bug reports!"
           (dolist (spec (cddr group))
             (insert! (indent 8 "%-10s %s\n")
                      ((car spec) (cdr spec)))))
-        (insert "```\n</details>"))
+        (insert "```\n"))
       (if (not doom-interactive-p)
           (print! (buffer-string))
-        (switch-to-buffer buffer)
+        (pop-to-buffer buffer)
         (kill-new (buffer-string))
-        (print! (green "Copied markdown to clipboard"))))))
+        (print! (green "Copied your doom info to clipboard"))))))
 
 ;;;###autoload
 (defun doom/am-i-secure ()
@@ -323,7 +320,11 @@ Some items are not supported by the `nsm.el' module."
                       package--init-file-ensured t
                       package-user-dir ,package-user-dir
                       package-archives ',package-archives
-                      user-emacs-directory ,doom-emacs-dir)
+                      user-emacs-directory ,doom-emacs-dir
+                      comp-deferred-compilation nil
+                      comp-eln-load-path ',(bound-and-true-p comp-eln-load-path)
+                      comp-async-env-modifier-form ',(bound-and-true-p comp-async-env-modifier-form)
+                      comp-deferred-compilation-black-list ',(bound-and-true-p comp-deferred-compilation-black-list))
                 (with-eval-after-load 'undo-tree
                   ;; undo-tree throws errors because `buffer-undo-tree' isn't
                   ;; correctly initialized
