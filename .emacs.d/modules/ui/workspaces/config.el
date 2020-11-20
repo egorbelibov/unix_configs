@@ -111,6 +111,29 @@ stored in `persp-save-dir'.")
                (setq uniquify-buffer-name-style +workspace--old-uniquify-style))
              (advice-remove #'doom-buffer-list #'+workspace-buffer-list)))))
 
+  ;; Per-workspace `winner-mode' history
+  (add-to-list 'window-persistent-parameters '(winner-ring . t))
+
+  (add-hook! 'persp-before-deactivate-functions
+    (defun +workspaces-save-winner-data-h (_)
+      (when (and (bound-and-true-p winner-mode)
+                 (get-current-persp))
+        (set-persp-parameter
+         'winner-ring (list winner-currents
+                            winner-ring-alist
+                            winner-pending-undo-ring)))))
+
+  (add-hook! 'persp-activated-functions
+    (defun +workspaces-load-winner-data-h (_)
+      (when (bound-and-true-p winner-mode)
+        (cl-destructuring-bind
+            (currents alist pending-undo-ring)
+            (or (persp-parameter 'winner-ring) (list nil nil nil))
+          (setq winner-undo-frame nil
+                winner-currents currents
+                winner-ring-alist alist
+                winner-pending-undo-ring pending-undo-ring)))))
+
   ;; We don't rely on the built-in mechanism for auto-registering a buffer to
   ;; the current workspace; some buffers slip through the cracks. Instead, we
   ;; add buffers when they are switched to.
@@ -141,6 +164,16 @@ stored in `persp-save-dir'.")
       (if (eq (car head) (window-buffer window))
           (cadr prev-buffers)
         head)))
+
+  ;; HACK Fixes #4196, #1525: selecting deleted buffer error when quitting Emacs
+  ;;      or on some buffer listing ops.
+  (defadvice! +workspaces-remove-dead-buffers-a (persp)
+    :before #'persp-buffers-to-savelist
+    (when (perspective-p persp)
+      ;; HACK Can't use `persp-buffers' because of a race condition with its gv
+      ;;      getter/setter not being defined in time.
+      (setf (aref persp 2)
+            (cl-delete-if-not #'persp-get-buffer-or-null (persp-buffers persp)))))
 
   ;; Delete the current workspace if closing the last open window
   (define-key! persp-mode-map

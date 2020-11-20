@@ -132,7 +132,7 @@
          "C-p"     #'company-select-previous-or-abort
          "C-j"     #'company-select-next-or-abort
          "C-k"     #'company-select-previous-or-abort
-         "C-s"     (cmd! (company-search-abort) (company-filter-candidates))
+         "C-s"     #'company-filter-candidates
          [escape]  #'company-search-abort)))
 
       (:when (featurep! :completion ivy)
@@ -219,30 +219,31 @@
 
 ;;; :editor
 (map! (:when (featurep! :editor format)
-        :n "gQ" #'+format:region)
+       :n "gQ" #'+format:region)
 
       (:when (featurep! :editor rotate-text)
-        :n "!"  #'rotate-text)
+       :n "]r"  #'rotate-text
+       :n "[r"  #'rotate-text-backward)
 
       (:when (featurep! :editor multiple-cursors)
-        ;; evil-multiedit
-        :v  "R"     #'evil-multiedit-match-all
-        :n  "M-d"   #'evil-multiedit-match-symbol-and-next
-        :n  "M-D"   #'evil-multiedit-match-symbol-and-prev
-        :v  "M-d"   #'evil-multiedit-match-and-next
-        :v  "M-D"   #'evil-multiedit-match-and-prev
-        :nv "C-M-d" #'evil-multiedit-restore
-        (:after evil-multiedit
-          (:map evil-multiedit-state-map
-            "M-d"    #'evil-multiedit-match-and-next
-            "M-D"    #'evil-multiedit-match-and-prev
-            "RET"    #'evil-multiedit-toggle-or-restrict-region
-            [return] #'evil-multiedit-toggle-or-restrict-region)))
+       ;; evil-multiedit
+       :v  "R"     #'evil-multiedit-match-all
+       :n  "M-d"   #'evil-multiedit-match-symbol-and-next
+       :n  "M-D"   #'evil-multiedit-match-symbol-and-prev
+       :v  "M-d"   #'evil-multiedit-match-and-next
+       :v  "M-D"   #'evil-multiedit-match-and-prev
+       :nv "C-M-d" #'evil-multiedit-restore
+       (:after evil-multiedit
+        (:map evil-multiedit-state-map
+         "M-d"    #'evil-multiedit-match-and-next
+         "M-D"    #'evil-multiedit-match-and-prev
+         "RET"    #'evil-multiedit-toggle-or-restrict-region
+         [return] #'evil-multiedit-toggle-or-restrict-region)))
 
       (:when (featurep! :editor snippets)
-        ;; auto-yasnippet
-        :i  [C-tab] #'aya-expand
-        :nv [C-tab] #'aya-create))
+       ;; auto-yasnippet
+       :i  [C-tab] #'aya-expand
+       :nv [C-tab] #'aya-create))
 
 ;;; :tools
 (when (featurep! :tools eval)
@@ -316,6 +317,8 @@
         :desc "Switch buffer"           "B" #'switch-to-buffer)
        (:unless (featurep! :ui workspaces)
         :desc "Switch buffer"           "b" #'switch-to-buffer)
+       :desc "Clone buffer"                "c"   #'clone-indirect-buffer
+       :desc "Clone buffer other window"   "C"   #'clone-indirect-buffer-other-window
        :desc "Kill buffer"                 "d"   #'kill-current-buffer
        :desc "ibuffer"                     "i"   #'ibuffer
        :desc "Kill buffer"                 "k"   #'kill-current-buffer
@@ -376,8 +379,8 @@
        :desc "Copy this file"              "C"   #'doom/copy-this-file
        :desc "Find directory"              "d"   #'+default/dired
        :desc "Delete this file"            "D"   #'doom/delete-this-file
-       :desc "Find file in emacs.d"        "e"   #'+default/find-in-emacsd
-       :desc "Browse emacs.d"              "E"   #'+default/browse-emacsd
+       :desc "Find file in emacs.d"        "e"   #'doom/find-file-in-emacsd
+       :desc "Browse emacs.d"              "E"   #'doom/browse-in-emacsd
        :desc "Find file"                   "f"   #'find-file
        :desc "Find file from here"         "F"   #'+default/find-file-under-here
        :desc "Locate file"                 "l"   #'locate

@@ -95,7 +95,10 @@ If no viewers are found, `latex-preview-pane' is used.")
   (when (featurep! +lsp)
     (add-hook! '(tex-mode-local-vars-hook
                  latex-mode-local-vars-hook)
-               #'lsp!)))
+               #'lsp!))
+  (map! :map LaTeX-mode-map
+        :localleader
+        :desc "View" "v" #'TeX-view))
 
 
 (use-package! tex-fold
@@ -159,8 +162,8 @@ Math faces should stay fixed by the mixed-pitch blacklist, this is mostly for
     :around #'LaTeX-fill-region-as-para-do
     (let ((LaTeX-indent-environment-list
            (append LaTeX-indent-environment-list
-                   '(("itemize"   +latex/LaTeX-indent-item)
-                     ("enumerate" +latex/LaTeX-indent-item)))))
+                   '(("itemize"   +latex-indent-item-fn)
+                     ("enumerate" +latex-indent-item-fn)))))
       (apply orig-fn args)))
   (defadvice! +latex--dont-indent-itemize-and-enumerate-a (orig-fn &rest args)
     :around #'LaTeX-fill-region-as-paragraph

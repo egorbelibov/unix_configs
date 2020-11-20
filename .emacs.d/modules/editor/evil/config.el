@@ -74,9 +74,6 @@ directives. By default, this only recognizes C directives.")
   ;; Start help-with-tutorial in emacs state
   (advice-add #'help-with-tutorial :after (lambda (&rest _) (evil-emacs-state +1)))
 
-  ;; Allows you to click buttons without initiating a selection
-  (define-key evil-motion-state-map [down-mouse-1] nil)
-
   ;; Done in a hook to ensure the popup rules load as late as possible
   (add-hook! 'doom-init-modules-hook
     (defun +evil--init-popup-rules-h ()
@@ -90,7 +87,7 @@ directives. By default, this only recognizes C directives.")
   (defvar +evil--default-cursor-color "#ffffff")
   (defvar +evil--emacs-cursor-color "#ff9999")
 
-  (add-hook! 'doom-load-theme-hook
+  (add-hook! 'doom-load-theme-hook :append
     (defun +evil-update-cursor-color-h ()
       (setq +evil--default-cursor-color (face-background 'cursor)
             +evil--emacs-cursor-color (face-foreground 'warning))))
@@ -370,6 +367,16 @@ directives. By default, this only recognizes C directives.")
   :config (global-evil-surround-mode 1))
 
 
+(use-package! evil-textobj-anyblock
+  :defer t
+  :config
+  (setq evil-textobj-anyblock-blocks
+        '(("(" . ")")
+          ("{" . "}")
+          ("\\[" . "\\]")
+          ("<" . ">"))))
+
+
 (use-package! evil-traces
   :after evil-ex
   :config
@@ -541,6 +548,7 @@ directives. By default, this only recognizes C directives.")
       :textobj "i" #'evil-indent-plus-i-indent         #'evil-indent-plus-a-indent
       :textobj "j" #'evil-indent-plus-i-indent-up-down #'evil-indent-plus-a-indent-up-down
       :textobj "k" #'evil-indent-plus-i-indent-up      #'evil-indent-plus-a-indent-up
+      :textobj "q" #'+evil:inner-any-quote             #'+evil:outer-any-quote
       :textobj "u" #'+evil:inner-url-txtobj            #'+evil:outer-url-txtobj
       :textobj "x" #'evil-inner-xml-attr               #'evil-outer-xml-attr
 

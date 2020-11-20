@@ -12,7 +12,8 @@
     init-file-debug
     jka-compr-verbose
     url-debug
-    use-package-verbose)
+    use-package-verbose
+    (message-log-max . 16384))
   "A list of variable to toggle on `doom-debug-mode'.
 
 Each entry can be a variable symbol or a cons cell whose CAR is the variable
@@ -124,7 +125,9 @@ ready to be pasted in a bug report on github."
          (buildopts . ,system-configuration-options)
          (features  . ,system-configuration-features)
          (traits . ,(delq
-                     nil (list (if (not doom-interactive-p) 'batch)
+                     nil (list (cond ((not doom-interactive-p) 'batch)
+                                     ((display-graphic-p) 'gui)
+                                     ('tty))
                                (if (daemonp) 'daemon)
                                (if (and (require 'server)
                                         (server-running-p))
@@ -142,6 +145,9 @@ ready to be pasted in a bug report on github."
         (doom
          (dir     . ,(abbrev-path (file-truename doom-private-dir)))
          (version . ,doom-version)
+         ,@(when doom-interactive-p
+             `((font  . ,(bound-and-true-p doom-font))
+               (theme . ,(bound-and-true-p doom-theme))))
          (build   . ,(sh "git" "log" "-1" "--format=%D %h %ci"))
          (elc-files
           . ,(length (doom-files-in `(,@doom-modules-dirs
@@ -313,9 +319,11 @@ Some items are not supported by the `nsm.el' module."
     (with-temp-file file
       (prin1 `(progn
                 (setq noninteractive nil
+                      user-init-file ,file
                       process-environment ',doom--initial-process-environment
                       exec-path ',doom--initial-exec-path
                       init-file-debug t
+                      doom--initial-load-path load-path
                       load-path ',load-path
                       package--init-file-ensured t
                       package-user-dir ,package-user-dir
@@ -446,6 +454,21 @@ If called when a backtrace buffer is present, it and the output of `doom-info'
 will be automatically appended to the result."
   (interactive)
   (browse-url "https://github.com/hlissner/doom-emacs/issues/new/choose"))
+
+;;;###autoload
+(defun doom/copy-buffer-contents (buffer-name)
+  "Copy the contents of BUFFER-NAME to your clipboard."
+  (interactive
+   (list (if current-prefix-arg
+             (completing-read "Select buffer: " (mapcar #'buffer-name (buffer-list)))
+           (buffer-name (current-buffer)))))
+  (let ((buffer (get-buffer buffer-name)))
+    (unless (buffer-live-p buffer)
+      (user-error "Buffer isn't live"))
+    (kill-new
+     (with-current-buffer buffer
+       (substring-no-properties (buffer-string))))
+    (message "Contents of %S were copied to the clipboard" buffer-name)))
 
 
 ;;

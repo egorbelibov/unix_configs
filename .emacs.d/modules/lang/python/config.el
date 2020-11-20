@@ -187,6 +187,7 @@
         :localleader
         :map python-mode-map
         :prefix ("t" . "test")
+        "a" #'python-pytest
         "f" #'python-pytest-file-dwim
         "F" #'python-pytest-file
         "t" #'python-pytest-function-dwim
@@ -287,7 +288,9 @@
 
 (use-package! poetry
   :when (featurep! +poetry)
-  :after python)
+  :after python
+  :init
+  (add-hook 'python-mode-hook #'poetry-tracking-mode))
 
 
 (use-package! cython-mode
