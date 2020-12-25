@@ -541,12 +541,6 @@ the exported output (i.e. formatters)."
     :before-while #'org-fix-tags-on-the-fly
     org-auto-align-tags)
 
-  ;; HACK Org is known to use a lot of unicode symbols (and large org files tend
-  ;;      to be especially memory hungry). Compounded with
-  ;;      `inhibit-compacting-font-caches' being non-nil, org needs more memory
-  ;;      to be performant.
-  (setq-hook! 'org-mode-hook gcmh-high-cons-threshold (* 2 gcmh-high-cons-threshold))
-
   (defadvice! +org--recenter-after-follow-link-a (&rest _args)
     "Recenter after following a link, but only internal or file links."
     :after '(org-footnote-action
@@ -1128,6 +1122,8 @@ compelling reason, so..."
     (run-hooks 'org-load-hook))
 
   :config
+  (add-to-list 'doom-debug-variables 'org-export-async-debug)
+
   (set-company-backend! 'org-mode 'company-capf 'company-dabbrev)
   (set-eval-handler! 'org-mode #'+org-eval-handler)
   (set-lookup-handlers! 'org-mode

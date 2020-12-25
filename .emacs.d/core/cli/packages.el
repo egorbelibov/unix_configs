@@ -225,16 +225,20 @@ list remains lean."
                                    collect path)
              for file in (doom-files-in paths :match "\\.el\\(?:\\.gz\\)?$")
              if (and (file-exists-p (byte-compile-dest-file file))
-                     (not (doom--find-eln-file (doom--eln-file-name file)))) do
+                     (not (doom--find-eln-file (doom--eln-file-name file)))
+                     (not (cl-some (lambda (re)
+                                     (string-match-p re file))
+                                   comp-deferred-compilation-deny-list))) do
              (doom-log "Compiling %s" file)
-             (native-compile-async file nil 'late))))
+             (native-compile-async file))))
 
 (defun doom--bootstrap-trampolines ()
   "Build the trampolines we need to prevent hanging."
   (when (featurep 'comp)
     ;; HACK The following list was obtained by running 'doom build', waiting for
-    ;; it to hang, then checking the eln-cache for trampolines.  We simulate
-    ;; running 'doom build' twice by compiling the trampolines then restarting.
+    ;;      it to hang, then checking the eln-cache for trampolines.  We
+    ;;      simulate running 'doom build' twice by compiling the trampolines
+    ;;      then restarting.
     (let (restart)
       (dolist (f '(abort-recursive-edit
                    describe-buffer-bindings
@@ -255,7 +259,7 @@ list remains lean."
         (unless (doom--find-eln-file
                  (concat comp-native-version-dir "/"
                          (comp-trampoline-filename f)))
-          (print! "Compiling trampoline for %s" f)
+          (print! (info "Compiling trampoline for %s") f)
           (comp-trampoline-compile f)
           (setq restart t)))
       (when restart
