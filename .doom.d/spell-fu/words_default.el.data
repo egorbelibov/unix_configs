@@ -1,0 +1,1 @@
+(("version" . "0.1"))#s(hash-table size 3 test equal rehash-size 1.5 rehash-threshold 0.8125 data ("" t "error: the file \"/usr/local/cellar/aspell/0.60.8/lib/aspell-0.60/en_pt\" can not be opened for reading." t "this" t))

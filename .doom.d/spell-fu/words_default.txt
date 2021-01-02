@@ -1,0 +1,3 @@
+
+Error: The file "/usr/local/Cellar/aspell/0.60.8/lib/aspell-0.60/en_PT" can not be opened for reading.
+This

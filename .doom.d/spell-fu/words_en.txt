@@ -2877,6 +2877,7 @@ almanac's
 almanacs
 Almaty
 Almaty's
+Almeida
 Almighty
 almighty
 Almighty's
@@ -7592,7 +7593,6 @@ backdrop
 backdrop's
 backdrops
 backed
-backend
 backer
 backer's
 backers
@@ -9778,6 +9778,7 @@ Belgium
 Belgium's
 Belgrade
 Belgrade's
+Belibov
 belie
 belied
 belief
@@ -10453,6 +10454,7 @@ beys
 bezel
 bezel's
 bezels
+Bezmenov
 bf
 BFF
 bhaji
@@ -13653,6 +13655,7 @@ Bridgeport
 Bridgeport's
 Bridger
 Bridger's
+Bridgerton
 Bridges
 bridges
 Bridges's
@@ -15580,7 +15583,6 @@ calamitous
 calamitously
 calamity
 calamity's
-Calc
 calcareous
 calciferous
 calcification
@@ -23150,7 +23152,6 @@ confiders
 confides
 confiding
 confidingly
-Config
 configurable
 configuration
 configuration's
@@ -24475,6 +24476,7 @@ copay's
 cope
 cope's
 coped
+Copelan
 Copeland
 Copeland's
 Copenhagen
@@ -24786,6 +24788,7 @@ coronas
 coronation
 coronation's
 coronations
+Coronavirus
 coroner
 coroner's
 coroners
@@ -30672,6 +30675,7 @@ deuterium
 deuterium's
 Deuteronomy
 Deuteronomy's
+dev
 devaluation
 devaluation's
 devaluations
@@ -35696,7 +35700,7 @@ egomania's
 egomaniac
 egomaniac's
 egomaniacs
-egorbelibov
+Egor
 egos
 egotism
 egotism's
@@ -36266,7 +36270,6 @@ emaciation
 emaciation's
 Emacs
 Emacs's
-emacsmirror
 email
 email's
 emailed
@@ -40129,6 +40132,7 @@ falling
 falloff
 falloff's
 falloffs
+Fallon
 Fallopian
 Fallopian's
 fallout
@@ -40584,7 +40588,6 @@ faunas
 fauns
 Fauntleroy
 Fauntleroy's
-Faure
 Faust
 Faust's
 Faustian
@@ -42021,6 +42024,7 @@ flail's
 flailed
 flailing
 flails
+flaims
 flair
 flair's
 flairs
@@ -44264,6 +44268,7 @@ Fridays
 fridge
 fridge's
 fridges
+Fridman
 fried
 Frieda
 Frieda's
@@ -44590,7 +44595,6 @@ ftp
 ftpers
 ftping
 ftps
-Fu
 Fuchs
 Fuchs's
 fuchsia
@@ -45626,6 +45630,7 @@ gasket's
 gaskets
 gaslight
 gaslight's
+gaslighting
 gaslights
 gasman
 gasmen
@@ -53316,6 +53321,7 @@ hottest
 hottie
 hotties
 hotting
+Hotz
 Houdini
 Houdini's
 hound
@@ -54667,6 +54673,7 @@ IKEA
 IKEA's
 Ikhnaton
 Ikhnaton's
+Ikigai
 IL
 Ila
 Ila's
@@ -55693,6 +55700,8 @@ incensing
 incentive
 incentive's
 incentives
+incentivize
+incentivized
 inception
 inception's
 inceptions
@@ -59015,6 +59024,7 @@ Jacquard
 jacquard
 Jacquard's
 jacquard's
+Jacque
 Jacqueline
 Jacqueline's
 Jacquelyn
@@ -61192,6 +61202,7 @@ Kimberley
 Kimberley's
 Kimberly
 Kimberly's
+Kimmel
 kimono
 kimono's
 kimonos
@@ -63816,6 +63827,7 @@ Lewinsky
 Lewinsky's
 Lewis
 Lewis's
+Lex
 lexer
 lexers
 lexical
@@ -66420,6 +66432,7 @@ maestro's
 maestros
 Maeterlinck
 Maeterlinck's
+Mafalda
 Mafia
 mafia
 Mafia's
@@ -67279,6 +67292,7 @@ Manitoba
 Manitoba's
 Manitoulin
 Manitoulin's
+Mank
 mankind
 mankind's
 manky
@@ -70256,6 +70270,7 @@ Miles's
 milestone
 milestone's
 milestones
+Miley
 milf
 milf's
 Milford
@@ -71501,7 +71516,6 @@ modeled
 modeler
 modeler's
 modelers
-Modeline
 modeling
 modeling's
 modelings
@@ -73629,6 +73643,7 @@ muumuus
 Muzak
 muzak
 Muzak's
+MuZero
 muzzily
 muzziness
 muzzle
@@ -73845,12 +73860,15 @@ naivete
 naivete's
 naivety
 naivety's
+Nakamoto
 naked
 nakedly
 nakedness
 nakedness's
 Nam
 Nam's
+Namaskar
+Namaste
 Namath
 Namath's
 name
@@ -75225,7 +75243,6 @@ nil
 nil's
 Nile
 Nile's
-nim
 nimbi
 nimble
 nimbleness
@@ -81384,7 +81401,6 @@ pause's
 paused
 pauses
 pausing
-Pavane
 Pavarotti
 Pavarotti's
 pave
@@ -93682,7 +93698,6 @@ replies
 reply
 reply's
 replying
-repo
 repopulate
 repopulated
 repopulates
@@ -97154,6 +97169,7 @@ Sadducee's
 Sade
 Sade's
 sades
+Sadhguru
 sadhu
 sadhus
 Sadie
@@ -102208,6 +102224,7 @@ Sidney
 Sidney's
 SIDS
 SIDS's
+sie
 siege
 siege's
 sieges
@@ -102347,6 +102364,8 @@ signposted
 signposting
 signposts
 signs
+Sigtract
+Sigtrakt
 Sigurd
 Sigurd's
 Sihanouk
@@ -102765,6 +102784,7 @@ sitemap's
 sitemaps
 sites
 siting
+sitracted
 sits
 sitter
 sitter's
@@ -108803,7 +108823,6 @@ subculture's
 subcultures
 subcutaneous
 subcutaneously
-subdirectory
 subdivide
 subdivided
 subdivides
@@ -109788,6 +109807,7 @@ superimposes
 superimposing
 superimposition
 superimposition's
+Superintelligency
 superintend
 superintended
 superintendence
@@ -113042,6 +113062,7 @@ thees
 theft
 theft's
 thefts
+thefutur
 Theiler
 Theiler's
 their
@@ -113602,7 +113623,6 @@ thrush's
 thrushes
 thrust
 thrust's
-thrusters
 thrusting
 thrusts
 thruway
@@ -119190,7 +119210,6 @@ unprovided
 unprovoked
 unpublished
 unpunished
-Unpushed
 unqualified
 unquenchable
 unquestionable
@@ -119453,7 +119472,6 @@ unsporting
 unsportsmanlike
 unstable
 unstably
-Unstaged
 unstained
 unstated
 unsteadier
@@ -123656,6 +123674,7 @@ whatever
 whatnot
 whatnot's
 whats
+WhatsApp
 whatshername
 whatshisname
 whatsit
@@ -124917,6 +124936,7 @@ wolfish
 wolfram
 wolfram's
 wolfs
+Wolfwalkers
 Wollongong
 Wollongong's
 Wollstonecraft
