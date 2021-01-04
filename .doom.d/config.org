@@ -37,7 +37,9 @@ Quite personal matters, hence no further comments.
  fill-column 100
  help-window-select t
  indent-tabs-mode nil
- tab-width 4)
+ tab-width 4
+ ispell-dictionary "en"
+ locate-command "mdfind")
 #+END_SRC
 
 Fine tuned defaults:

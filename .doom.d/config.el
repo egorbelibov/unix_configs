@@ -14,7 +14,9 @@
  fill-column 100
  help-window-select t
  indent-tabs-mode nil
- tab-width 4)
+ tab-width 4
+ ispell-dictionary "en"
+ locate-command "mdfind")
 
 (set-default-coding-systems 'utf-8)
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
