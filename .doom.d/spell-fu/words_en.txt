@@ -1199,6 +1199,7 @@ adequate
 adequately
 adequateness
 adequateness's
+Adhanom
 Adhara
 Adhara's
 adhere
@@ -7600,6 +7601,7 @@ backdrop
 backdrop's
 backdrops
 backed
+backend
 backer
 backer's
 backers
@@ -7638,6 +7640,7 @@ backlash
 backlash's
 backlashes
 backless
+Backlinks
 backlog
 backlog's
 backlogged
@@ -9079,6 +9082,7 @@ Bavaria
 Bavaria's
 Bavarian
 Bavarian's
+Baverstock
 bawd
 bawd's
 bawdier
@@ -13170,6 +13174,7 @@ brainchild
 brainchild's
 brainchildren
 brainchildren's
+braindump
 brained
 brainier
 brainiest
@@ -14919,6 +14924,7 @@ burner's
 burners
 Burnett
 Burnett's
+Burnham
 burning
 burnish
 burnish's
@@ -15592,6 +15598,7 @@ calamitous
 calamitously
 calamity
 calamity's
+Calc
 calcareous
 calciferous
 calcification
@@ -20195,6 +20202,7 @@ clacks
 clad
 cladding
 cladding's
+Cladex
 Claiborne
 Claiborne's
 claim
@@ -23162,6 +23170,7 @@ confiders
 confides
 confiding
 confidingly
+Config
 configurable
 configuration
 configuration's
@@ -25498,6 +25507,7 @@ couture's
 couturier
 couturier's
 couturiers
+CoV
 covalent
 covariance
 covariant
@@ -25547,6 +25557,7 @@ covets
 covey
 covey's
 coveys
+Covid
 cow
 cow's
 Coward
@@ -29536,6 +29547,7 @@ Demeter
 Demeter's
 Demetrius
 Demetrius's
+Demic
 demigod
 demigod's
 demigoddess
@@ -35713,6 +35725,7 @@ egomaniac
 egomaniac's
 egomaniacs
 Egor
+egorbelibov
 egos
 egotism
 egotism's
@@ -36282,6 +36295,7 @@ emaciation
 emaciation's
 Emacs
 Emacs's
+emacsmirror
 email
 email's
 emailed
@@ -37718,6 +37732,7 @@ epitomize
 epitomized
 epitomizes
 epitomizing
+Epizootic
 epoch
 epoch's
 epochal
@@ -44792,6 +44807,7 @@ fundamentalists
 fundamentally
 fundamentals
 funded
+funders
 funding
 funding's
 fundraiser
@@ -45367,6 +45383,7 @@ gamekeeper
 gamekeeper's
 gamekeepers
 gamely
+Gamemarks
 gameness
 gameness's
 gamer
@@ -49487,6 +49504,7 @@ hackish
 hackle
 hackle's
 hackles
+Hacknet
 hackney
 hackney's
 hackneyed
@@ -49496,6 +49514,7 @@ hacks
 hacksaw
 hacksaw's
 hacksaws
+hackthebox
 hacktivist
 hacktivist's
 hacktivists
@@ -52277,6 +52296,7 @@ hitherto
 Hitler
 Hitler's
 Hitlers
+Hitman
 hits
 hitter
 hitter's
@@ -53531,6 +53551,7 @@ HTML
 HTML's
 Hts
 HTTP
+https
 Huang
 Huang's
 huarache
@@ -56359,6 +56380,7 @@ indwells
 indwelt
 Indy
 Indy's
+indzent
 inebriate
 inebriate's
 inebriated
@@ -59979,6 +60001,7 @@ Jonathon
 Jonathon's
 Jones
 Jones's
+Jong
 Joni
 Joni's
 jonquil
@@ -65005,6 +65028,7 @@ loci
 lock
 lock's
 lockable
+Lockdowns
 Locke
 Locke's
 Lockean
@@ -66291,6 +66315,7 @@ Machiavelli
 Machiavelli's
 Machiavellian
 Machiavellian's
+Machiavellians
 Machina
 machinable
 machinate
@@ -68708,6 +68733,7 @@ MD
 Md
 MD's
 Md's
+mdfind
 mdse
 MDT
 ME
@@ -69556,6 +69582,7 @@ Merton
 Merton's
 Mervin
 Mervin's
+Meryl
 mes
 Mesa
 mesa
@@ -70256,6 +70283,7 @@ mikes
 Mikhail
 Mikhail's
 miking
+Mikki
 Mikoyan
 Mikoyan's
 mil
@@ -71031,6 +71059,7 @@ miserly
 misers
 misery
 misery's
+Mises
 misfeasance
 misfeasance's
 misfeature
@@ -71547,6 +71576,7 @@ modeled
 modeler
 modeler's
 modelers
+Modeline
 modeling
 modeling's
 modelings
@@ -71752,6 +71782,7 @@ Moldavian
 moldboard
 moldboard's
 moldboards
+Moldbug
 molded
 molder
 molder's
@@ -74116,6 +74147,7 @@ Nashua
 Nashua's
 Nashville
 Nashville's
+Nass
 Nassau
 Nassau's
 Nasser
@@ -75280,6 +75312,7 @@ nil
 nil's
 Nile
 Nile's
+nim
 nimbi
 nimble
 nimbleness
@@ -80454,6 +80487,7 @@ papilla
 papilla's
 papillae
 papillary
+Papilloma
 papist
 papist's
 papists
@@ -81931,6 +81965,7 @@ pelmet
 pelmets
 Peloponnese
 Peloponnese's
+Pelosi
 pelt
 pelt's
 pelted
@@ -83027,6 +83062,7 @@ Pharisee's
 pharisee's
 Pharisees
 pharisees
+Pharma
 pharmaceutic
 pharmaceutic's
 pharmaceutical
@@ -84599,6 +84635,8 @@ pleasantry
 pleasantry's
 please
 pleased
+Pleaser
+Pleasers
 pleases
 pleasing
 pleasingly
@@ -85217,6 +85255,7 @@ politicos
 politics
 politics's
 polities
+Politifact
 polity
 polity's
 Polk
@@ -93739,6 +93778,7 @@ replies
 reply
 reply's
 replying
+repo
 repopulate
 repopulated
 repopulates
@@ -95196,6 +95236,7 @@ ribbon's
 ribbons
 riboflavin
 riboflavin's
+Ribonucleic
 ribs
 Ricardo
 Ricardo's
@@ -100296,6 +100337,7 @@ sensible
 sensibleness
 sensibleness's
 sensibly
+sensical
 sensing
 sensitisation
 sensitisation's
@@ -105245,6 +105287,7 @@ source's
 sourced
 Sourceforge
 Sourceforge's
+Sourcer
 sources
 sourcing
 sourdough
@@ -108872,6 +108915,7 @@ subculture's
 subcultures
 subcutaneous
 subcutaneously
+subdirectory
 subdivide
 subdivided
 subdivides
@@ -112217,6 +112261,7 @@ tediousness
 tediousness's
 tedium
 tedium's
+Tedros
 teds
 tee
 tee's
@@ -113673,6 +113718,7 @@ thrush's
 thrushes
 thrust
 thrust's
+thrusters
 thrusting
 thrusts
 thruway
@@ -121932,6 +121978,7 @@ Vlasic's
 VLF
 vlf
 VLF's
+Vlogger
 VOA
 vocab
 vocable
@@ -122110,6 +122157,7 @@ vomit's
 vomited
 vomiting
 vomits
+von
 Vonda
 Vonda's
 Vonnegut
@@ -123328,6 +123376,7 @@ webisodes
 weblog
 weblog's
 weblogs
+Webmarks
 webmaster
 webmaster's
 webmasters
@@ -124318,6 +124367,7 @@ Wii's
 wiki
 wiki's
 Wikileaks
+Wikimedia
 Wikipedia
 Wikipedia's
 wikis
@@ -125989,6 +126039,7 @@ Yaroslavl
 Yaroslavl's
 yarrow
 yarrow's
+Yarvin
 yashmak
 yashmaks
 Yataro
