@@ -235,6 +235,10 @@ results buffer.")
   (setq counsel-describe-function-function #'helpful-callable
         counsel-describe-variable-function #'helpful-variable)
 
+  ;; Decorate `doom/help-custom-variable' results the same way as
+  ;; `counsel-describe-variable' (adds value and docstring columns).
+  (ivy-configure 'doom/help-custom-variable :parent 'counsel-describe-variable)
+
   ;; Record in jumplist when opening files via counsel-{ag,rg,pt,git-grep}
   (add-hook 'counsel-grep-post-action-hook #'better-jumper-set-jump)
   (add-hook 'counsel-grep-post-action-hook #'recenter)
@@ -287,10 +291,10 @@ results buffer.")
     "Change `counsel-file-jump' to use fd or ripgrep, if they are available."
     :override #'counsel--find-return-list
     (cl-destructuring-bind (find-program . args)
-        (cond ((when-let (fd (executable-find (or doom-projectile-fd-binary "fd")))
+        (cond ((when-let (fd (executable-find (or doom-projectile-fd-binary "fd") t))
                  (append (list fd "-H" "--color=never" "--type" "file" "--type" "symlink" "--follow")
                          (if IS-WINDOWS '("--path-separator=/")))))
-              ((executable-find "rg")
+              ((executable-find "rg" t)
                (append (list "rg" "--files" "--follow" "--color=never" "--hidden" "-g!.git" "--no-messages")
                        (cl-loop for dir in projectile-globally-ignored-directories
                                 collect "--glob"
