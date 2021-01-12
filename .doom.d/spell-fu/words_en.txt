@@ -27940,6 +27940,7 @@ darkies
 darkly
 darkness
 darkness's
+Darko
 darkroom
 darkroom's
 darkrooms
@@ -90366,6 +90367,7 @@ raindrop
 raindrop's
 raindrops
 rained
+Rainey's
 rainfall
 rainfall's
 rainfalls
@@ -119675,6 +119677,7 @@ untouchables
 untouched
 untoward
 untraceable
+Untracked
 untrained
 untrammeled
 untrammelled
