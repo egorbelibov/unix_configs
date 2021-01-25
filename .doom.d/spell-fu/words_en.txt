@@ -199,6 +199,7 @@ ablaze
 able
 abler
 ablest
+Ableton
 abloom
 ablution
 ablution's
@@ -4074,6 +4075,7 @@ animosity
 animosity's
 animus
 animus's
+Animusic
 anion
 anion's
 anionic
@@ -16381,6 +16383,7 @@ capillary
 capillary's
 Capistrano
 Capistrano's
+Capita
 capital
 capital's
 capitalisation
@@ -37757,6 +37760,7 @@ equability
 equability's
 equable
 equably
+Equador
 equal
 equal's
 equaled
@@ -59764,6 +59768,7 @@ jinni
 jinni's
 Jinny
 Jinny's
+Jinping
 jinrikisha
 jinrikisha's
 jinrikishas
@@ -75305,6 +75310,7 @@ Nikkei
 Nikkei's
 Nikki
 Nikki's
+Nikola
 Nikolai
 Nikolai's
 Nikon
@@ -93343,6 +93349,7 @@ reminding
 reminds
 Remington
 Remington's
+Remini
 reminisce
 reminisced
 reminiscence
@@ -101373,6 +101380,7 @@ shenanigan's
 shenanigans
 Shenyang
 Shenyang's
+Shenzhen
 Sheol
 Sheol's
 Shepard
@@ -112920,6 +112928,7 @@ Tertiary's
 TESL
 Tesla
 Tesla's
+Teslas
 TESOL
 Tess
 Tess's
@@ -120283,6 +120292,7 @@ uvular's
 uvulars
 uvulas
 uxorious
+Uyghurs
 Uzbek
 Uzbek's
 Uzbekistan
@@ -121596,6 +121606,7 @@ Vince
 Vince's
 Vincent
 Vincent's
+Vinci
 vincible
 Vindemiatrix
 Vindemiatrix's
