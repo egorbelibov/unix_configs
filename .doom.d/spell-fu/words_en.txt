@@ -2346,6 +2346,7 @@ Akiva
 Akiva's
 Akkad
 Akkad's
+AKo
 Akron
 Akron's
 AL
@@ -5158,6 +5159,7 @@ aptness
 aptness's
 Apuleius
 Apuleius's
+AQo
 aqua
 aqua's
 aquaculture
@@ -6574,6 +6576,7 @@ atmospheric
 atmospherically
 atmospherics
 atmospherics's
+ATo
 atoll
 atoll's
 atolls
@@ -7777,6 +7780,7 @@ Bactria
 Bactria's
 bad
 bad's
+Badass
 badder
 baddest
 baddie
@@ -36211,6 +36215,7 @@ Elohim
 Elohim's
 Eloise
 Eloise's
+Elon
 elongate
 elongated
 elongates
@@ -52444,6 +52449,7 @@ hoer
 hoer's
 hoers
 hoes
+Hof
 Hoff
 Hoff's
 Hoffa
@@ -60178,6 +60184,7 @@ Jpn
 Jr
 jr
 Jr's
+JTs
 Juan
 Juan's
 Juana
@@ -61485,6 +61492,7 @@ kiwifruit
 kiwifruit's
 kiwifruits
 kiwis
+KJo
 KKK
 KKK's
 kl
@@ -61907,6 +61915,7 @@ ks
 Kshatriya
 Kshatriya's
 kt
+KTs
 Kublai
 Kublai's
 Kubrick
@@ -74589,6 +74598,7 @@ negotiations
 negotiator
 negotiator's
 negotiators
+Negreanu
 Negress
 Negress's
 Negresses
@@ -84226,6 +84236,7 @@ pix's
 pixel
 pixel's
 pixels
+pixelwise
 pixie
 pixie's
 pixies
@@ -89439,6 +89450,7 @@ Qinghai
 Qinghai's
 Qiqihar
 Qiqihar's
+QJo
 QM
 Qom
 Qom's
@@ -95996,6 +96008,7 @@ roentgen's
 roentgens
 roes
 ROFL
+Rogan
 Rogelio
 Rogelio's
 Roger
@@ -105451,6 +105464,7 @@ spacewalks
 spacewoman
 spacewoman's
 spacewomen
+SpaceX
 spacey
 spacial
 spacier
@@ -107216,6 +107230,7 @@ starlight's
 starling
 starling's
 starlings
+Starlink
 starlit
 Starr
 Starr's
@@ -107225,6 +107240,7 @@ starriest
 starring
 starry
 stars
+Starship
 starstruck
 start
 start's
@@ -109282,6 +109298,7 @@ subversiveness's
 subversives
 subvert
 subverted
+subverter
 subverting
 subverts
 subway
@@ -117574,6 +117591,7 @@ tyros
 Tyson
 Tyson's
 tzatziki
+Tzu
 U
 u
 U's
@@ -124536,6 +124554,7 @@ Wilton
 Wilton's
 wilts
 wily
+Wim
 Wimbledon
 Wimbledon's
 wimp

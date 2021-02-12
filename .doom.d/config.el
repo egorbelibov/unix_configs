@@ -12,6 +12,7 @@
  editorconfig-mode 1
  evil-want-fine-undo t
  fill-column 100
+ frame-resize-pixelwise t
  help-window-select t
  indent-tabs-mode nil
  tab-width 4
