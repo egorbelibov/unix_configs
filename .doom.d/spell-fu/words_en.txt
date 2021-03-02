@@ -10179,6 +10179,7 @@ Bernays
 Bernays's
 Bernbach
 Bernbach's
+Berners
 Bernese
 Bernhardt
 Bernhardt's
@@ -35765,6 +35766,7 @@ Ehrenberg
 Ehrenberg's
 Ehrlich
 Ehrlich's
+Eich
 Eichmann
 Eichmann's
 eider
@@ -44789,6 +44791,7 @@ fun
 fun's
 Funafuti
 Funafuti's
+funcs
 function
 function's
 functional
