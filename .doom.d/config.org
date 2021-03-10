@@ -40,7 +40,8 @@ Quite personal matters, hence no further comments.
  indent-tabs-mode nil
  tab-width 4
  ispell-dictionary "en"
- locate-command "mdfind")
+ locate-command "mdfind"
+ multi-term-program "/bin/zsh")
 #+END_SRC
 
 Fine tuned defaults:
@@ -100,7 +101,8 @@ The *ultimate* font for hackers.
 *** Theme
 My *ultimate* theme based on ~Solarized~.
 #+BEGIN_SRC emacs-lisp
-(load-theme 'eb-dark t)
+;; (load-theme 'eb-dark t)
+(load-theme 'eb-light t)
 #+END_SRC
 
 *** Modeline

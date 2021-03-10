@@ -42,6 +42,7 @@
       image
       kotlin-mode
       occur
+      outline
       package-menu
       simple
       slime
@@ -54,6 +55,8 @@ variable for an explanation of the defaults (in comments). See
 
   ;; We do this ourselves, and better.
   (defvar evil-collection-want-unimpaired-p nil)
+  ;; Doom binds goto-reference on gD and goto-assignments on gA ourselves
+  (defvar evil-collection-want-find-usages-bindings-p nil)
 
   ;; We handle loading evil-collection ourselves
   (defvar evil-collection--supported-modes nil)

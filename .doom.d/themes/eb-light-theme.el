@@ -1,4 +1,4 @@
-;;; themes/eb-dark-theme.el -*- lexical-binding: t; -*-
+;;; themes/eb-light-theme.el -*- lexical-binding: t; -*-
 (require 'doom-themes)
 
 ;;
@@ -69,9 +69,7 @@ determine the exact padding."
    (vertical-bar   base4)
    (selection      dark-blue)
    (builtin        magenta)
-   (comments       (if doom-solarized-light-brighter-comments
-                       (doom-lighten teal 0.25)
-                     base6))
+   (comments       base6)
    (doc-comments   teal)
    (constants      violet)
    (functions      magenta)
@@ -167,7 +165,7 @@ determine the exact padding."
    (markdown-markup-face :foreground base5)
    (markdown-header-face :inherit 'bold
                          :foreground red)
-   (markdown-url-face    :foreground teal
+   (markdown-url-face    :foreground base6
                          :weight 'normal)
    (markdown-reference-face :foreground base6)
    ((markdown-bold-face &override)   :foreground fg)
@@ -177,17 +175,18 @@ determine the exact padding."
    ((outline-1 &override) :foreground blue)
    ((outline-2 &override) :foreground teal)
    ((outline-3 &override) :foreground teal)
-   ((outline-4 &override) :foreground (doom-darken blue 0.2))
-   ((outline-5 &override) :foreground (doom-darken teal 0.2))
-   ((outline-6 &override) :foreground (doom-darken teal 0.2))
-   ((outline-7 &override) :foreground (doom-darken blue 0.4))
-   ((outline-8 &override) :foreground (doom-darken teal 0.4))
+   ((outline-4 &override) :foreground blue)
+   ((outline-5 &override) :foreground blue)
+   ((outline-6 &override) :foreground blue)
+   ((outline-7 &override) :foreground blue)
+   ((outline-8 &override) :foreground blue)
 
    ;; org-mode
-   ((org-block &override) :background base2)
+   ((org-block &override) :background base1)
    ((org-block-begin-line &override) :foreground comments
-    :background base1)
+    :background base2)
    (org-hide :foreground hidden)
+   (org-quote :background base1)
    (solaire-org-hide-face :foreground hidden))
 
   ;; --- extra variables ---------------------

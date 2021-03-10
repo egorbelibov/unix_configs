@@ -41,7 +41,8 @@
  doom-variable-pitch-font (font-spec :family "Hack" :size 16)
  doom-serif-font (font-spec :family "Times New Roman"))
 
-(load-theme 'eb-dark t)
+;; (load-theme 'eb-dark t)
+(load-theme 'eb-light t)
 
 (defun doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
