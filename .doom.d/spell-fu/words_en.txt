@@ -5784,6 +5784,7 @@ arrow's
 arrowhead
 arrowhead's
 arrowheads
+Arrowized
 arrowroot
 arrowroot's
 arrows
@@ -20290,6 +20291,7 @@ clanswoman
 clanswomen
 clap
 clap's
+Clapbacks
 clapboard
 clapboard's
 clapboarded
@@ -21304,6 +21306,7 @@ coddles
 coddling
 code
 code's
+codebase
 coded
 codeine
 codeine's
@@ -21312,6 +21315,7 @@ codependency's
 codependent
 codependent's
 codependents
+codepoints
 coder
 coder's
 coders
@@ -27485,6 +27489,7 @@ cytoplasmic
 cytosine
 cytosine's
 CZ
+Czaplicki
 czar
 czar's
 czarina
@@ -28015,6 +28020,7 @@ data
 database
 database's
 databases
+Datalog
 Datamation
 datatype
 date
@@ -28036,6 +28042,7 @@ dating
 dative
 dative's
 datives
+Datomic
 datum
 datum's
 daub
@@ -28810,6 +28817,7 @@ decry
 decrying
 decryption
 DECs
+Dedalus
 Dedekind
 Dedekind's
 dedicate
@@ -29071,6 +29079,7 @@ deflower
 deflowered
 deflowering
 deflowers
+defmodule
 Defoe
 Defoe's
 defog
@@ -30531,6 +30540,7 @@ destructively
 destructiveness
 destructiveness's
 destructs
+Destructure
 desuetude
 desuetude's
 desultorily
@@ -36107,6 +36117,7 @@ Elisha's
 elision
 elision's
 elisions
+Elisp
 elite
 elite's
 elites
@@ -42840,6 +42851,7 @@ FM's
 Fm's
 fMRI
 FMs
+fn
 FNMA
 FNMA's
 foal
@@ -52604,6 +52616,7 @@ holstering
 holsters
 Holt
 Holt's
+Holtz
 holy
 homage
 homage's
@@ -53519,6 +53532,7 @@ HTML
 HTML's
 Hts
 HTTP
+https
 Huang
 Huang's
 huarache
@@ -62436,6 +62450,7 @@ Langley
 Langley's
 Langmuir
 Langmuir's
+Langs
 language
 language's
 languages
@@ -73678,6 +73693,7 @@ myelitis
 myelitis's
 Myers
 Myers's
+myfile
 Mylar
 Mylar's
 Mylars
@@ -76358,6 +76374,7 @@ nozzles
 NP
 Np
 Np's
+npm
 NPR
 NPR's
 NR
@@ -96873,6 +96890,7 @@ runt
 runt's
 runtier
 runtiest
+runtime
 runts
 runty
 runway
@@ -102933,6 +102951,7 @@ skewers
 skewing
 skews
 skhd
+skhdrc
 ski
 ski's
 skibob
@@ -114703,6 +114722,7 @@ toolmaker
 toolmaker's
 toolmakers
 tools
+toolset
 toot
 toot's
 tooted
@@ -115520,6 +115540,7 @@ transformable
 transformation
 transformation's
 transformations
+Transformative
 transformed
 transformer
 transformer's
@@ -116906,6 +116927,7 @@ Tupi
 Tupi's
 tuple
 tuples
+Tuplespaces
 tuppence
 tuppenny
 Tupperware
@@ -117531,6 +117553,7 @@ UHF's
 ui
 Uighur
 Uighur's
+UIs
 Ujungpandang
 Ujungpandang's
 UK
@@ -119590,6 +119613,7 @@ untouchables
 untouched
 untoward
 untraceable
+Untracked
 untrained
 untrammeled
 untrammelled
@@ -125971,6 +125995,7 @@ yawning
 yawns
 yaws
 yaws's
+Yay
 Yb
 Yb's
 yd
@@ -126654,6 +126679,7 @@ Zr
 Zr's
 Zs
 zsh
+zshrc
 Zsigmondy
 Zsigmondy's
 zt
