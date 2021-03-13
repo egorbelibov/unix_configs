@@ -56,8 +56,8 @@ alt - m : yabai -m space --mirror x-axis
 shift + alt - m : yabai -m space --mirror y-axis
 
 ## Modify space layout
-# alt - m : yabai -m space --layout bsp
-# shift + alt - m : yabai -m space --layout float
+alt - m : yabai -m space --layout bsp
+shift + alt - m : yabai -m space --layout float
 
 ## Focus window
 alt - r : yabai - m window --focus recent
@@ -102,7 +102,7 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 # Toggle window split type
 alt - e : yabai -m window --toggle split
 
-# Float / unfloat window and center on screen
+# Float / Un-float window and center on screen
 alt - t : yabai -m window --toggle float;\
            yabai -m window --grid 4:4:1:1:2:2
 
