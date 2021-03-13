@@ -17,7 +17,10 @@
  indent-tabs-mode nil
  tab-width 4
  ispell-dictionary "en"
- locate-command "mdfind")
+ locate-command "mdfind"
+ multi-term-program "/bin/zsh"
+ lsp-ui-mode nil
+ )
 
 (set-default-coding-systems 'utf-8)
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -42,7 +45,8 @@
  doom-serif-font (font-spec :family "Times New Roman"))
 
 ;; (load-theme 'eb-dark t)
-(load-theme 'eb-light t)
+;; (load-theme 'eb-light t)
+(load-theme 'eb-white t)
 
 (defun doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
@@ -51,8 +55,6 @@
                           (eq buffer-file-coding-system 'utf-8)))))
 
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
-
-
 
 (map! :leader
       (:prefix "b"
@@ -96,7 +98,7 @@
 
 (after! evil (evil-escape-mode nil))
 
-(indent-guide-global-mode)
+;; (indent-guide-global-mode)
 
 (add-hook 'dired-mode-hook 'org-download-enable)
 (setq org-download-image-dir "~/main/egorbelibov/assets/roam/download")
@@ -115,6 +117,11 @@
       org-log-done 'time
       org-export-in-background t
       org-catch-invisible-edits 'smart)
+
+(setq lsp-lens-enable t
+      lsp-modeline-code-actions-mode t
+      lsp-headerline-breadcrumb-enable t
+      )
 
 (setq circe-network-options
       '(("Freenode"

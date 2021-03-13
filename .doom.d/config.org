@@ -41,7 +41,9 @@ Quite personal matters, hence no further comments.
  tab-width 4
  ispell-dictionary "en"
  locate-command "mdfind"
- multi-term-program "/bin/zsh")
+ multi-term-program "/bin/zsh"
+ lsp-ui-mode nil
+ )
 #+END_SRC
 
 Fine tuned defaults:
@@ -58,6 +60,7 @@ It's useful to be asked which file to open after splitting.
   :after '(evil-window-split evil-window-vsplit)
   (+ivy/switch-buffer))
 #+END_SRC
+
 #+BEGIN_SRC emacs-lisp
 (setq +ivy-buffer-preview t)
 #+END_SRC
@@ -102,7 +105,8 @@ The *ultimate* font for hackers.
 My *ultimate* theme based on ~Solarized~.
 #+BEGIN_SRC emacs-lisp
 ;; (load-theme 'eb-dark t)
-(load-theme 'eb-light t)
+;; (load-theme 'eb-light t)
+(load-theme 'eb-white t)
 #+END_SRC
 
 *** Modeline
@@ -115,10 +119,6 @@ My *ultimate* theme based on ~Solarized~.
                           (eq buffer-file-coding-system 'utf-8)))))
 
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
-#+END_SRC
-
-*** Org-mode
-#+BEGIN_SRC emacs-lisp
 #+END_SRC
 
 ** Bindings
@@ -268,12 +268,25 @@ For indentation. Specially useful for nim.
 (package! indent-guide)
 #+END_SRC
 
+Elisp formatting
+#+BEGIN_SRC emacs-lisp
+(package! elisp-format)
+#+END_SRC
+
 **** Language Support
 If it ain't useful and fast, why bother?
 
 Svelte, the love of my life.
 #+BEGIN_SRC emacs-lisp
 (package! svelte-mode)
+#+END_SRC
+
+*** Balderdash (Disabled) Packages
+Cause why in the world were they included?
+
+Disable package that overlays code with errors/warnings from Flycheck
+#+BEGIN_SRC emacs-lisp
+(package! flycheck-popup-tip :disable t)
 #+END_SRC
 
 ** Package Configuration
@@ -322,7 +335,7 @@ I ♥ my keyboard.
 #+END_SRC
 
 *** Dumb-Jump
-Enable ~xref~ backend.
+Enable ~xref~ back-end.
 #+BEGIN_SRC emacs-lisp
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 #+END_SRC
@@ -340,7 +353,7 @@ So there's this one package called ~evil-escape~. Here's the thing, I don't use 
 
 *** Indent-Guide
 #+BEGIN_SRC emacs-lisp
-(indent-guide-global-mode)
+;; (indent-guide-global-mode)
 #+END_SRC
 
 *** Org-Download
@@ -381,6 +394,15 @@ Talk is cheap. Show me the code.
       org-log-done 'time
       org-export-in-background t
       org-catch-invisible-edits 'smart)
+#+END_SRC
+
+*** LSP
+Language Server Protocol? Haha kkk
+#+BEGIN_SRC emacs-lisp
+(setq lsp-lens-enable t
+      lsp-modeline-code-actions-mode t
+      lsp-headerline-breadcrumb-enable t
+      )
 #+END_SRC
 
 ** IRC Circe Config
