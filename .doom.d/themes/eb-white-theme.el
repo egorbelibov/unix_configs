@@ -1,38 +1,6 @@
 ;;; themes/eb-white-theme.el -*- lexical-binding: t; -*-
 (require 'doom-themes)
 
-;;
-(defgroup eb-white-theme nil
-  "Options for doom-themes"
-  :group 'doom-themes)
-
-(defcustom eb-dark-brighter-modeline nil
-  "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'eb-dark-theme
-  :type 'boolean)
-
-(defcustom eb-dark-brighter-comments nil
-  "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'eb-dark-theme
-  :type 'boolean)
-
-(defcustom eb-dark-brighter-text nil
-  "If non-nil, default text will be brighter."
-  :group 'eb-dark-theme
-  :type 'boolean)
-
-(defcustom eb-dark-comment-bg eb-dark-brighter-comments
-  "If non-nil, comments will have a subtle, darker background. Enhancing their
-legibility."
-  :group 'eb-dark-theme
-  :type 'boolean)
-
-(defcustom eb-dark-padded-modeline doom-themes-padded-modeline
-  "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
-determine the exact padding."
-  :group 'eb-dark-theme
-  :type '(choice integer boolean))
-
 (def-doom-theme eb-white "A light theme inspired by Solarized light"
   ;; name        default   256       16
   ((bg         '("#F3F3F3" nil       nil            ))
@@ -48,7 +16,6 @@ determine the exact padding."
    (base8      '("#626C6C" "#dfdfdf" "white"        ))
    (fg         '("#556b72" "#2d2d2d" "white"        ))
    (fg-alt     '("#607981" "#bfbfbf" "brightwhite"  ))
-
    (grey       base4)
    (red        '("#dc322f" "#ff6655" "red"          ))
    (orange     '("#556b72" "#556b72" "black"        ))
@@ -78,8 +45,10 @@ determine the exact padding."
    (strings        cyan)
    (variables      blue)
    (numbers        violet)
-   (region         `(,(doom-darken (car bg-alt) 0.07) ,@(doom-darken (cdr base0) 0.07)))
-   (error          red)
+   (region         `(,(doom-darken (car bg-alt) 0.07)
+                     ,@(doom-darken (cdr base0) 0.07)))
+   (error
+    red)
    (warning        yellow)
    (success        green)
    (vc-modified    orange)
@@ -87,23 +56,18 @@ determine the exact padding."
    (vc-deleted     red)
 
    ;; custom categories
-   (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright eb-dark-brighter-modeline)
-   (-modeline-pad (when eb-dark-padded-modeline (if (integerp
-                                                     eb-dark-padded-modeline)
-                                                    eb-dark-padded-modeline
-                                                              4)))
-   (modeline-fg     nil)
+   (hidden `(,(car bg) "black" "black"))
+   (modeline-fg nil)
    (modeline-fg-alt base5)
-   (modeline-bg   (doom-darken (car bg) 0.10))
-   (modeline-bg-l   (doom-darken (car bg) 0.1))
+   (modeline-bg (doom-darken (car bg) 0.10))
+   (modeline-bg-l (doom-darken (car bg) 0.1))
    (modeline-bg-inactive (doom-lighten (car bg) 0.30))
    (modeline-bg-inactive-l `(,(car bg)
-                             ,@(cdr bg)))
-   )
+                             ,@(cdr bg))))
 
-  ;; --- extra faces ------------------------
-  ((company-tooltip-selection     :background base1)
+  ;; --- Extra Faces Options ------------------------
+  ((company-tooltip-selection :background base0)
+   (company-template-field :background "#000000")
    (elscreen-tab-other-screen-face :background "#353a42"
                                    :foreground "#1e2022")
    ((line-number &override) :foreground base4)
@@ -113,7 +77,7 @@ determine the exact padding."
                    :distant-foreground bg
                    :extend t)
    (font-lock-comment-face :foreground comments
-                           :background (if eb-dark-comment-bg (doom-lighten bg 0.05)))
+                           :background bg 0.05)
    (font-lock-doc-face :inherit 'font-lock-comment-face
                        :foreground doc-comments)
    (font-lock-keyword-face :weight 'bold
@@ -121,52 +85,67 @@ determine the exact padding."
    (font-lock-constant-face :weight 'bold
                             :foreground constants)
 
-   ;; Centaur tabs
-   (centaur-tabs-active-bar-face :background blue)
-   (centaur-tabs-modified-marker-selected :inherit 'centaur-tabs-selected
-                                          :foreground blue)
-   (centaur-tabs-modified-marker-unselected :inherit 'centaur-tabs-unselected
-                                            :foreground blue)
    ;; Doom modeline
    (doom-modeline-bar :background blue)
    (mode-line :background modeline-bg
-              :foreground modeline-fg
-              :box (if -modeline-pad
-                       `(:line-width ,-modeline-pad
-                         :color ,modeline-bg)))
-   (mode-line-inactive :background modeline-bg-inactive
-                       :foreground modeline-fg-alt
-                       :box (if -modeline-pad
-                                `(:line-width ,-modeline-pad
-                                  :color ,modeline-bg-inactive)))
-   (mode-line-emphasis :foreground (if -modeline-bright base8 highlight))
-   (solaire-mode-line-face :inherit 'mode-line
-                           :background modeline-bg-l
-                           :box (if -modeline-pad
-                                    `(:line-width ,-modeline-pad
-                                      :color ,modeline-bg-l)))
-   (solaire-mode-line-inactive-face :inherit 'mode-line-inactive
-                                    :background modeline-bg-inactive-l
-                                    :box (if -modeline-pad
-                                             `(:line-width ,-modeline-pad
-                                               :color ,modeline-bg-inactive-l)))
-   (tooltip              :background bg-alt
-                         :foreground fg)
+              :foreground modeline-fg)
+
+   ;; (doom-modeline-bar :background base6 )
+   ;; (doom-modeline-info :inherit 'mode-line-emphasis)
+   ;; (doom-modeline-urgent :inherit 'mode-line-emphasis)
+   ;; (doom-modeline-warning :inherit 'mode-line-emphasis)
+   ;; (doom-modeline-debug :inherit 'mode-line-emphasis)
+   ;; (doom-modeline-buffer-minor-mode :inherit 'mode-line-emphasis :weight 'bold)
+   ;; (doom-modeline-project-dir :inherit 'mode-line-emphasis :weight 'bold)
+   ;; (doom-modeline-project-parent-dir :inherit 'mode-line-emphasis :weight 'bold)
+   ;; (doom-modeline-persp-name :inherit 'mode-line-emphasis :weight 'bold)
+   ;; (doom-modeline-buffer-file :inherit 'mode-line-emphasis :weight 'bold)
+   ;; (doom-modeline-buffer-modified :inherit 'mode-line-emphasis :weight 'bold)
+   ;; (doom-modeline-lsp-success :inherit 'mode-line-emphasis :weight 'bold)
+   ;; (doom-modeline-buffer-path :inherit 'mode-line-emphasis :weight 'bold)
+   ;; (doom-modeline-buffer-project-root :inherit 'mode-line-emphasis)
+   ;; (doom-modeline-evil-insert-state :foreground cyan)
+   ;; (doom-modeline-evil-visual-state :foreground yellow)
+
+   ;; Tooltip
+   (tooltip :background base4
+            :foreground fg)
+
+   ;; Indent Guide
+   (indent-guide-face :foreground "#DCDCDC")
+
    ;; --- major-mode faces -------------------
+
+   ;; all-the-icons
+   (all-the-icons-dblue :foreground blue)
+
    ;; css-mode / scss-mode
    (css-proprietary-property :foreground orange)
-   (css-property             :foreground teal)
-   (css-selector             :foreground blue)
+   (css-property :foreground teal)
+   (css-selector :foreground blue)
+
+   ;; dired
+   (diredfl-dir-name :weight 'semi-bold)
 
    ;; markdown-mode
    (markdown-markup-face :foreground base5)
    (markdown-header-face :inherit 'bold
                          :foreground red)
-   (markdown-url-face    :foreground base6
-                         :weight 'normal)
+   (markdown-url-face :foreground base6
+                      :weight 'normal)
    (markdown-reference-face :foreground base6)
-   ((markdown-bold-face &override)   :foreground fg)
+   ((markdown-bold-face &override) :foreground fg)
    ((markdown-italic-face &override) :foreground fg-alt)
+
+   ;; org-mode
+   ((org-block &override) :background bg-alt)
+   ((org-block-begin-line &override) :foreground comments
+    :background base2)
+   (org-hide :foreground hidden)
+   (org-quote :background bg-alt)
+   (org-drawer :foreground base8
+               :weight 'semi-bold)
+   (org-document-info-keyword :foreground base6)
 
    ;; outline (affects org-mode)
    ((outline-1 &override) :foreground blue)
@@ -176,17 +155,6 @@ determine the exact padding."
    ((outline-5 &override) :foreground blue)
    ((outline-6 &override) :foreground blue)
    ((outline-7 &override) :foreground blue)
-   ((outline-8 &override) :foreground blue)
-
-   ;; org-mode
-   ((org-block &override) :background bg-alt)
-   ((org-block-begin-line &override) :foreground comments
-    :background base2)
-   (org-hide :foreground hidden)
-   (org-quote :background bg-alt))
-
-  ;; --- extra variables ---------------------
-  ;; ()
-  )
+   ((outline-8 &override) :foreground blue)))
 
 ;;; eb-white-theme.el ends here
