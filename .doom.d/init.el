@@ -35,7 +35,7 @@
  ;;hydra
  ;;indent-guides        ; highlighted indent columns
  ;;minimap              ; show a map of the code on the side
- modeline               ; snazzy, Atom-inspired modeline, plus API
+ ;; (modeline +light)      ; snazzy, Atom-inspired modeline, plus API
  ;;nav-flash            ; blink cursor line after big motions
  ;; neotree             ; a project drawer, like NERDTree for vim
  ophints                ; highlight the region an operation acts on
@@ -79,7 +79,7 @@
 
  :checkers
  syntax                 ; tasing you for every semicolon you forget
- spell                  ; tasing you for misspelling mispelling
+ ;;spell                ; tasing you for misspelling mispelling
  ;;grammar              ; tasing grammar mistake every you make
 
  :tools
@@ -127,7 +127,8 @@
  ;;fstar                ; (dependent) types and (monadic) effects and Z3
  ;;gdscript             ; the language you waited for
  go                     ; the hipster dialect
- ;;(haskell +dante)     ; a language that's lazier than I am
+ haskell                ; a language that's lazier than I am
+ ;; (haskell +dante)    ; a language that's lazier than I am
  ;;hy                   ; readability of scheme w/ speed of python
  ;;idris                ;
  json                   ; At least it ain't XML

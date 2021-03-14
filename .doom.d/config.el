@@ -6,31 +6,22 @@
 
 (setq-default
  delete-by-moving-to-trash t
- delete-selection-mode 1
+ line-number-mode nil
+ global-display-line-numbers-mode nil
  display-line-numbers-type nil
  doom-modeline-enable-word-count nil
  editorconfig-mode 1
- evil-want-fine-undo t
+ evil-want-fine-undo nil ;; t -> vim-like undo
  fill-column 100
- frame-resize-pixelwise t
- help-window-select t
  indent-tabs-mode nil
  tab-width 4
- ispell-dictionary "en"
+ ispell-dictionary "en_GB"
  locate-command "mdfind"
  multi-term-program "/bin/zsh"
- lsp-ui-mode nil
- )
+ lsp-ui-mode nil)
 
 (set-default-coding-systems 'utf-8)
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
-
-(defadvice! promt-for-buffer (&rest _)
-  :after '(evil-window-split evil-window-vsplit)
-  (+ivy/switch-buffer))
-
-(setq +ivy-buffer-preview t)
 
 (setq-default major-mode 'org-mode)
 
@@ -48,13 +39,27 @@
 ;; (load-theme 'eb-light t)
 (load-theme 'eb-white t)
 
-(defun doom-modeline-conditional-buffer-encoding ()
-  "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
-  (setq-local doom-modeline-buffer-encoding
-              (unless (or (eq buffer-file-coding-system 'utf-8-unix)
-                          (eq buffer-file-coding-system 'utf-8)))))
+(setq-default
+ mode-line-format
+ '("%e"
+   mode-line-front-space
+   mode-line-mule-info
+   mode-line-client
+   mode-line-modified
+   mode-line-remote
+   mode-line-frame-identification
+   mode-line-buffer-identification
+   "   "
+   mode-line-position
+   (vc-mode vc-mode)
+   "  "
+   mode-line-misc-info mode-line-end-spaces))
 
-(add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
+(defadvice! doom--disable-all-the-icons-in-tty-a (&rest _)
+  :override '(all-the-icons-octicon all-the-icons-material
+              all-the-icons-faicon all-the-icons-fileicon
+              all-the-icons-wicon all-the-icons-alltheicon)
+  "")
 
 (map! :leader
       (:prefix "b"
@@ -79,10 +84,8 @@
   (setq company-idle-delay nil)
   (add-hook 'evil-normal-state-entry-hook #'company-abort))
 
-(setq-default history-length 1000)
+(setq-default history-length 50)
 (setq-default history-delete-duplicates t)
-
-(setq spell-fu-directory "~/.doom.d/spell-fu")
 
 (global-disable-mouse-mode)
 ;; And, for evil's individual states.
@@ -97,8 +100,6 @@
 (setq dumb-jump-default-project "~/main")
 
 (after! evil (evil-escape-mode nil))
-
-;; (indent-guide-global-mode)
 
 (add-hook 'dired-mode-hook 'org-download-enable)
 (setq org-download-image-dir "~/main/egorbelibov/assets/roam/download")
@@ -120,12 +121,4 @@
 
 (setq lsp-lens-enable t
       lsp-modeline-code-actions-mode t
-      lsp-headerline-breadcrumb-enable t
-      )
-
-(setq circe-network-options
-      '(("Freenode"
-         :nick "egorbelibov"
-         :sasl-username "egorbelibov"
-         :channels ("#nim")
-         )))
+      lsp-headerline-breadcrumb-enable t)
