@@ -7,17 +7,17 @@ No rules are universal (except this one).
 
 * Core Configurations
 Jiggle things up with lexical binding (see [[https://nullprogram.com/blog/2016/12/22/][this blog post]] for more info).
-#+BEGIN_SRC emacs-lisp :comments no
+#+begin_src emacs-lisp :comments no
 ;;; config.el -*- lexical-binding: t; -*-
-#+END_SRC
+#+end_src
 
 ** User Info
 You know, all the conventional stuff…
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq
  user-full-name "Egor Belibov"
  user-mail-address "egor@belibov.dev")
-#+END_SRC
+#+end_src
 
 ** Sweat Defaults
 #+BEGIN_QUOTE
@@ -26,7 +26,7 @@ We either live with intention or exist by default.
 
 *** Common Settings
 Quite personal matters, hence no further comments.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq-default
  delete-by-moving-to-trash t
  line-number-mode nil
@@ -42,19 +42,19 @@ Quite personal matters, hence no further comments.
  locate-command "mdfind"
  multi-term-program "/bin/zsh"
  lsp-ui-mode nil)
-#+END_SRC
+#+end_src
 
 Fine tuned defaults:
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (set-default-coding-systems 'utf-8)
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
-#+END_SRC
+#+end_src
 
 *** Buffer Defaults
 New buffers should be, by default, opened in ~org-mode~, cause ~org-mode~.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq-default major-mode 'org-mode)
-#+END_SRC
+#+end_src
 
 *** Performance Boosters
 Let's put some thrusters on the back of this "Roadster".
@@ -62,15 +62,15 @@ Let's put some thrusters on the back of this "Roadster".
 Emacs has the capability to display ~left-to-right~ and ~right-to-left~ languages at the
 same time in the same buffer. I don't need it. Because it adds to the amount of line scans
 that Emacs has to do to render a line, here are some changes.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq-default bidi-paragraph-direction 'left-to-right)
-#+END_SRC
+#+end_src
 
 When the lines in a file are so long that performance could suffer to an unacceptable
 degree, the following invokes something much more basic.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (global-so-long-mode 1)
-#+END_SRC
+#+end_src
 
 -----
 *NOTE*: You can test and evaluate performance with ~profiler-start~ and ~profiler-stop~.
@@ -78,24 +78,24 @@ degree, the following invokes something much more basic.
 ** User Interface
 *** Font Face
 The *ultimate* font for hackers.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq
  doom-font (font-spec :family "Hack" :size 12)
  doom-big-font (font-spec :family "Hack" :size 16)
  doom-variable-pitch-font (font-spec :family "Hack" :size 16)
  doom-serif-font (font-spec :family "Times New Roman"))
-#+END_SRC
+#+end_src
 
 *** Theme
 My *ultimate* theme based on ~Solarized~.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 ;; (load-theme 'eb-dark t)
 ;; (load-theme 'eb-light t)
 (load-theme 'eb-white t)
-#+END_SRC
+#+end_src
 
 *** Modeline
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq-default
  mode-line-format
  '("%e"
@@ -111,29 +111,29 @@ My *ultimate* theme based on ~Solarized~.
    (vc-mode vc-mode)
    "  "
    mode-line-misc-info mode-line-end-spaces))
-#+END_SRC
+#+end_src
 
 *** Disable All The Icons
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defadvice! doom--disable-all-the-icons-in-tty-a (&rest _)
   :override '(all-the-icons-octicon all-the-icons-material
               all-the-icons-faicon all-the-icons-fileicon
               all-the-icons-wicon all-the-icons-alltheicon)
   "")
-#+END_SRC
+#+end_src
 
 ** Bindings
 Life-time savers (kinda).
 
 *** (Enable/Disable) Fill column
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (map! :leader
       (:prefix "b"
        :desc "Display fill-column indicator"    "f" #'display-fill-column-indicator-mode))
-#+END_SRC
+#+end_src
 
 *** File
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (map!
  :leader
  (:prefix-map ("f" . "file")
@@ -144,15 +144,15 @@ Life-time savers (kinda).
    :desc "Downloads"    "d" (cmd! (find-file "~/Downloads"))
    :desc "Tmp"          "t" (cmd! (find-file "/tmp"))
    :desc "Home"         "h" (cmd! (find-file "~")))))
-#+END_SRC
+#+end_src
 
 ** Package Stack
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle "packages.el" :comments link
 :END:
-#+BEGIN_SRC emacs-lisp :tangle "packages.el" :comments no
+#+begin_src emacs-lisp :tangle "packages.el" :comments no
 ;; -*- no-byte-compile: t; -*-
-#+END_SRC
+#+end_src
 
 *** Instructions
 :PROPERTIES:
@@ -163,32 +163,32 @@ Upon adding new package, run ~doom refresh~ and restart Emacs.
 
 **** Package in MELPA/ELPA/emacsmirror
 To install ~the-package~ from MELPA, ELPA or emacsmirror:
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! the-package)
-#+END_SRC
+#+end_src
 
 **** Packages from git repositories
 To install a package directly from a particular repo, you'll need to specify a ~:recipe~.
 You'll find documentation on what ~:recipe~ accepts [[https://github.com/raxod502/straight.el#the-recipe-format][here]]:
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! another-package
   :recipe (:host github :repo "username/repo"))
-#+END_SRC
+#+end_src
 
 If the package you are trying to install does not contain a ~PACKAGENAME.el~ file, or is
 located in a subdirectory of the repo, you'll need to specify
 ~:files~ in the ~:recipe~:
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! this-package
   :recipe (:host github :repo "username/repo"
            :files ("some-file.el" "src/lisp/*.el")))
-#+END_SRC
+#+end_src
 
 **** Disabling build-in packages
 To disable a package included with Doom, you can do so here with the ~:disable~ property:
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! builtin-package :disable t)
-#+END_SRC
+#+end_src
 
 #+RESULTS:
 | builtin-package |
@@ -196,17 +196,17 @@ To disable a package included with Doom, you can do so here with the ~:disable~ 
 Override the recipe of a built in package without having to specify all the properties
 for ~:recipe~. These will inherit the rest of its recipe from Doom or the
 package providers.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! builtin-package :recipe (:nonrecursive t))
 (package! builtin-package-2 :recipe (:repo "myfork/package"))
-#+END_SRC
+#+end_src
 
 Specify a ~:branch~ to install a package from a particular branch or tag. This is required
 for some
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! builtin-package :recipe (:branch "develop"))
-#+END_SRC
+#+end_src
 
 *** Sweat Packages
 #+BEGIN_QUOTE
@@ -215,74 +215,74 @@ Always strive to make complex things simple.
 
 **** All The Fun
 Flash words, increase reading speed.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! spray)
-#+END_SRC
+#+end_src
 
 Let's get those fingers moving.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! speed-type)
-#+END_SRC
+#+end_src
 
 **** Convenient
 The technologies of convenience are making our sphere of exploration and experience smaller.
 
 The worst part about ~org-mode~? Having to leave it.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! org-pandoc-import
   :recipe (:host github
            :repo "tecosaur/org-pandoc-import"
            :files ("*.el" "filters" "preprocessors")))
-#+END_SRC
-#+BEGIN_SRC emacs-lisp
+#+end_src
+#+begin_src emacs-lisp
 (use-package! org-pandoc-import :after org)
-#+END_SRC
+#+end_src
 
 The fanciest terminal for emacs.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! multi-term)
-#+END_SRC
+#+end_src
 
 Who uses the mouse in Emacs?
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! disable-mouse)
-#+END_SRC
+#+end_src
 
 When in need of logging commands.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! command-log-mode)
-#+END_SRC
+#+end_src
 
 Every one needs to jump around dumbly from time to time, right?
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! dumb-jump)
-#+END_SRC
+#+end_src
 
 For indentation. Specially useful for nim.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! indent-guide)
-#+END_SRC
+#+end_src
 
 Elisp formatting
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! elisp-format)
-#+END_SRC
+#+end_src
 
 **** Language Support
 If it ain't useful and fast, why bother?
 
 Svelte, the love of my life.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! svelte-mode)
-#+END_SRC
+#+end_src
 
 *** Balderdash (Disabled) Packages
 Cause why in the world were they included?
 
 Disable package that overlays code with errors/warnings from Flycheck
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (package! flycheck-popup-tip :disable t)
-#+END_SRC
+#+end_src
 
 ** Package Configuration
 #+BEGIN_QUOTE
@@ -291,29 +291,29 @@ Another famous fluctuation that programs you is the exact configuration of your 
 
 *** Calc
 Cause radians are rad.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq calc-angle-mode 'rad
       calc-algebraic-mode t ;; allows '2*x instead of 'x<RET>2*
       calc-symbolic-mode t) ;; keeps stuff like √2 irrational for as long as possible
-#+END_SRC
+#+end_src
 
 *** Company
 Completion is nice but, only when I want it...
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (after! company
   (setq company-idle-delay nil)
   (add-hook 'evil-normal-state-entry-hook #'company-abort))
-#+END_SRC
+#+end_src
 
 Also, improve ~company~ (related) memory.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq-default history-length 50)
 (setq-default history-delete-duplicates t)
-#+END_SRC
+#+end_src
 
 *** Disable-Mousse
 I ♥ my keyboard.
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (global-disable-mouse-mode)
 ;; And, for evil's individual states.
 (mapc #'disable-mouse-in-keymap
@@ -321,69 +321,13 @@ I ♥ my keyboard.
             evil-normal-state-map
             evil-visual-state-map
             evil-insert-state-map))
-#+END_SRC
+#+end_src
 
 *** Dumb-Jump
 Enable ~xref~ back-end.
-#+BEGIN_SRC emacs-lisp
-(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-#+END_SRC
 
-And, in case things go sideways:
-#+BEGIN_SRC emacs-lisp
-(setq dumb-jump-default-project "~/main")
-#+END_SRC
-
-*** EVIL
-So there's this one package called ~evil-escape~. Here's the thing, I don't use it. So...
-#+BEGIN_SRC emacs-lisp
-(after! evil (evil-escape-mode nil))
-#+END_SRC
-
-*** Org-Download
-#+BEGIN_SRC emacs-lisp
-(add-hook 'dired-mode-hook 'org-download-enable)
-(setq org-download-image-dir "~/main/egorbelibov/assets/roam/download")
-#+END_SRC
-
-*** Projectile
-All about those projects.
-#+BEGIN_SRC emacs-lisp
-(setq projectile-project-search-path '("~/main/"))
-#+END_SRC
-
-*** Org-Roam
-The thinking process.
-#+BEGIN_SRC emacs-lisp
-(setq org-roam-directory "~/main/egorbelibov/data/braindump")
-#+END_SRC
-
-*** Org-Journal
-The evaluation process.
-#+BEGIN_SRC emacs-lisp
-(after! org-journal
-  (setq org-journal-date-prefix "#+TITLE: "
-        org-journal-date-format "%a %d/%m/%y (%j)"
-        org-journal-file-format "%Y-%m-%d.org"
-        org-journal-dir (file-truename "~/main/egorbelibov/data/braindump/private")))
-#+END_SRC
-
-** Language Configuration
-Talk is cheap. Show me the code.
-
-*** Org Mode
-**** Tweaking Defaults
-#+BEGIN_SRC emacs-lisp
-(setq org-directory "~/.org"
-      org-log-done 'time
-      org-export-in-background t
-      org-catch-invisible-edits 'smart)
-#+END_SRC
-
-*** LSP
-Language Server Protocol? 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (setq lsp-lens-enable t
       lsp-modeline-code-actions-mode t
       lsp-headerline-breadcrumb-enable t)
-#+END_SRC
+#+end_src
