@@ -359,6 +359,12 @@ So there's this one package called ~evil-escape~. Here's the thing, I don't use 
 (after! evil (evil-escape-mode nil))
 #+END_SRC
 
+*** Eshell
+Love️ + Eshell = Universe
+#+begin_src emacs-lisp
+(setq eshell-aliases-file "~/.doom.d/eshell-aliases")
+#+end_src
+
 *** Org-Download
 #+BEGIN_SRC emacs-lisp
 (add-hook 'dired-mode-hook 'org-download-enable)
@@ -512,7 +518,7 @@ The answer to the universe is 42.
 (add-hook 'sql-mode-hook (lambda () (setq-local counsel-dash-docsets '("CouchDB" "PostgreSQL"))))
 #+end_src
 
-Counsel Mapped Keys 
+Counsel Bindings
 #+begin_src emacs-lisp
 (map!
  :leader

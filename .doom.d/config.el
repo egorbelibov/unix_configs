@@ -116,6 +116,8 @@
 
 (after! evil (evil-escape-mode nil))
 
+(setq eshell-aliases-file "~/.doom.d/eshell-aliases")
+
 (add-hook 'dired-mode-hook 'org-download-enable)
 (setq org-download-image-dir "~/main/egorbelibov/assets/roam/download")
 
