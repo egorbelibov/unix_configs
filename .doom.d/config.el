@@ -118,10 +118,10 @@
 
 (setq eshell-aliases-file "~/.doom.d/eshell-aliases")
 
+(setq nov-text-width 100)
+
 (add-hook 'dired-mode-hook 'org-download-enable)
 (setq org-download-image-dir "~/main/egorbelibov/assets/roam/download")
-
-(setq projectile-project-search-path '("~/main/"))
 
 (setq org-roam-directory "~/main/egorbelibov/data/braindump")
 
@@ -130,6 +130,8 @@
         org-journal-date-format "%a %d/%m/%y (%j)"
         org-journal-file-format "%Y-%m-%d.org"
         org-journal-dir (file-truename "~/main/egorbelibov/data/braindump/private")))
+
+(setq projectile-project-search-path '("~/main/"))
 
 (setq org-directory "~/.org"
       org-log-done 'time

@@ -203,7 +203,7 @@ located in a subdirectory of the repo, you'll need to specify
            :files ("some-file.el" "src/lisp/*.el")))
 #+end_src
 
-**** Disabling build-in packages
+**** Disabling built-in packages
 To disable a package included with Doom, you can do so here with the ~:disable~ property:
 #+begin_src emacs-lisp
 (package! builtin-package :disable t)
@@ -252,8 +252,7 @@ The worst part about ~org-mode~? Having to leave it.
   :recipe (:host github
            :repo "tecosaur/org-pandoc-import"
            :files ("*.el" "filters" "preprocessors")))
-#+end_src
-#+begin_src emacs-lisp
+
 (use-package! org-pandoc-import :after org)
 #+end_src
 
@@ -285,6 +284,16 @@ For indentation. Specially useful for nim.
 Elisp formatting
 #+begin_src emacs-lisp
 (package! elisp-format)
+#+end_src
+
+Who doesn't read EPUBs?
+#+begin_src emacs-lisp
+(package! nov)
+
+(use-package! nov
+  :mode ("\\.epub\\'" . nov-mode)
+  :config
+  (setq nov-save-place-file (concat doom-cache-dir "nov-places")))
 #+end_src
 
 **** Language Support
@@ -365,16 +374,16 @@ Love️ + Eshell = Universe
 (setq eshell-aliases-file "~/.doom.d/eshell-aliases")
 #+end_src
 
+*** Nov (EPUBs)
+The place all want to spend their time.
+#+begin_src emacs-lisp
+(setq nov-text-width 100)
+#+end_src
+
 *** Org-Download
 #+BEGIN_SRC emacs-lisp
 (add-hook 'dired-mode-hook 'org-download-enable)
 (setq org-download-image-dir "~/main/egorbelibov/assets/roam/download")
-#+END_SRC
-
-*** Projectile
-All about those projects.
-#+BEGIN_SRC emacs-lisp
-(setq projectile-project-search-path '("~/main/"))
 #+END_SRC
 
 *** Org-Roam
@@ -391,6 +400,12 @@ The evaluation process.
         org-journal-date-format "%a %d/%m/%y (%j)"
         org-journal-file-format "%Y-%m-%d.org"
         org-journal-dir (file-truename "~/main/egorbelibov/data/braindump/private")))
+#+END_SRC
+
+*** Projectile
+All about those projects.
+#+BEGIN_SRC emacs-lisp
+(setq projectile-project-search-path '("~/main/"))
 #+END_SRC
 
 ** Language Configuration
