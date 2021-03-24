@@ -40,14 +40,12 @@ Quite personal matters, hence no further comments.
  tab-width 4
  ispell-dictionary "en_GB"
  locate-command "mdfind"
- multi-term-program "/bin/zsh"
- lsp-ui-mode nil)
+ multi-term-program "/bin/zsh")
 #+end_src
 
 Fine tuned defaults:
 #+begin_src emacs-lisp
 (set-default-coding-systems 'utf-8)
-(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
 #+end_src
 
 *** Buffer Defaults
@@ -128,7 +126,9 @@ My *ultimate* theme based on ~Solarized~.
    (vc-mode vc-mode)
    "  "
    mode-name
+   "  "
    mode-line-process
+   "  "
    mode-line-misc-info mode-line-end-spaces))
 #+end_src
 
@@ -423,9 +423,18 @@ Talk is cheap. Show me the code.
 *** LSP
 Language Server Protocol?
 #+begin_src emacs-lisp
-(setq lsp-lens-enable t
+(setq lsp-lens-enable nil
+      lsp-auto-execute-action nil
+      lsp-before-save-edits nil
+      lsp-ui-sideline-enable nil
       lsp-modeline-code-actions-mode t
-      lsp-headerline-breadcrumb-enable t)
+      lsp-headerline-breadcrumb-enable nil)
+#+end_src
+
+**** Flycheck
+The things that YELLS at your code everytime you make a mistake.
+#+begin_src emacs-lisp
+(setq flycheck-check-syntax-automatically '(save idle-change mode-enabled))
 #+end_src
 
 *** Elm

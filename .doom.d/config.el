@@ -17,11 +17,9 @@
  tab-width 4
  ispell-dictionary "en_GB"
  locate-command "mdfind"
- multi-term-program "/bin/zsh"
- lsp-ui-mode nil)
+ multi-term-program "/bin/zsh")
 
 (set-default-coding-systems 'utf-8)
-(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
 
 (setq-default major-mode 'org-mode)
 
@@ -67,7 +65,9 @@
    (vc-mode vc-mode)
    "  "
    mode-name
+   "  "
    mode-line-process
+   "  "
    mode-line-misc-info mode-line-end-spaces))
 
 (defadvice! doom--disable-all-the-icons-in-tty-a (&rest _)
@@ -138,9 +138,14 @@
       org-export-in-background t
       org-catch-invisible-edits 'smart)
 
-(setq lsp-lens-enable t
+(setq lsp-lens-enable nil
+      lsp-auto-execute-action nil
+      lsp-before-save-edits nil
+      lsp-ui-sideline-enable nil
       lsp-modeline-code-actions-mode t
-      lsp-headerline-breadcrumb-enable t)
+      lsp-headerline-breadcrumb-enable nil)
+
+(setq flycheck-check-syntax-automatically '(save idle-change mode-enabled))
 
 (setq elm-tags-on-save t
       elm-sort-imports-on-save t
