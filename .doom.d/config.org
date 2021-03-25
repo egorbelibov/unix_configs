@@ -29,10 +29,12 @@ Quite personal matters, hence no further comments.
 #+begin_src emacs-lisp
 (setq-default
  delete-by-moving-to-trash t
- line-number-mode nil
+ line-number-mode 1 ;; (modeline)
+ column-number-mode 1 ;; (modeline)
  global-display-line-numbers-mode nil
+ global-hl-line-mode nil
+ global-hl-line-modes nil
  display-line-numbers-type nil
- doom-modeline-enable-word-count nil
  editorconfig-mode 1
  evil-want-fine-undo nil ;; t - vim-like undo
  fill-column 100
@@ -107,6 +109,15 @@ My *ultimate* theme based on ~Solarized~.
 ;; (load-theme 'eb-dark t)
 ;; (load-theme 'eb-light t)
 (load-theme 'eb-white t)
+#+end_src
+
+**** Cursor
+#+begin_src emacs-lisp
+(setq evil-normal-state-cursor '(box)
+      evil-insert-state-cursor '(hbar)
+      evil-visual-state-cursor '(hollow)
+      evil-operator-state-cursor '(box "#404040")
+      evil-replace-state-cursor '(hollow))
 #+end_src
 
 *** Modeline
@@ -208,9 +219,6 @@ To disable a package included with Doom, you can do so here with the ~:disable~ 
 #+begin_src emacs-lisp
 (package! builtin-package :disable t)
 #+end_src
-
-#+RESULTS:
-| builtin-package |
 
 Override the recipe of a built in package without having to specify all the properties
 for ~:recipe~. These will inherit the rest of its recipe from Doom or the

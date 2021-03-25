@@ -14,9 +14,9 @@
    (base5      '("#D6D6D6" "#525252" "brightblack"  ))
    (base6      '("#92A2AF" "#6b6b6b" "brightblack"  ))
    (base7      '("#788484" "#979797" "brightblack"  ))
-   (base8      '("#626C6C" "#dfdfdf" "white"        ))
-   (fg         '("#556b72" "#2d2d2d" "white"        ))
-   (fg-alt     '("#607981" "#bfbfbf" "brightwhite"  ))
+   (base8      '("#626C6C" "#dfdfdf" "black"        ))
+   (fg         '("#556b72" "#2d2d2d" "black"        ))
+   (fg-alt     '("#7D9298" "#bfbfbf" "brightblack"  ))
 
    (grey       base4)
    (red        '("#dc322f" "#ff6655" "red"          ))
@@ -47,7 +47,7 @@
    (strings        cyan)
    (variables      blue)
    (numbers        violet)
-   (region         `(,(doom-darken (car bg-alt) 0.07) ,@(doom-darken (cdr base0) 0.07)))
+   (region         `(,(doom-darken (car bg-alt) 0.05) ,@(doom-darken (cdr base0) 0.06)))
    (error          red)
    (warning        yellow)
    (success        green)
@@ -61,6 +61,13 @@
 
   ;; --- Extra Faces Options ------------------------
   (
+   (cursor :background fg)
+
+   (lazy-highlight :background base3
+                   :foreground fg)
+
+   (evil-snipe-first-match-face :foreground fg)
+
    (company-tooltip-selection :background base0)
    (company-template-field :background "#000000")
 

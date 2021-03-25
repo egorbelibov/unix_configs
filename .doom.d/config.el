@@ -6,10 +6,12 @@
 
 (setq-default
  delete-by-moving-to-trash t
- line-number-mode nil
+ line-number-mode 1 ;; (modeline)
+ column-number-mode 1 ;; (modeline)
  global-display-line-numbers-mode nil
+ global-hl-line-mode nil
+ global-hl-line-modes nil
  display-line-numbers-type nil
- doom-modeline-enable-word-count nil
  editorconfig-mode 1
  evil-want-fine-undo nil ;; t - vim-like undo
  fill-column 100
@@ -49,6 +51,12 @@
 ;; (load-theme 'eb-dark t)
 ;; (load-theme 'eb-light t)
 (load-theme 'eb-white t)
+
+(setq evil-normal-state-cursor '(box)
+      evil-insert-state-cursor '(hbar)
+      evil-visual-state-cursor '(hollow)
+      evil-operator-state-cursor '(box "#404040")
+      evil-replace-state-cursor '(hollow))
 
 (setq-default
  mode-line-format
