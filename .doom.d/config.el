@@ -13,7 +13,7 @@
  global-hl-line-modes nil
  display-line-numbers-type nil
  editorconfig-mode 1
- evil-want-fine-undo nil ;; t - vim-like undo
+ evil-want-fine-undo t ;; vim-like undo
  fill-column 100
  indent-tabs-mode nil
  tab-width 4
