@@ -3,4 +3,7 @@ alias unix_configs /usr/bin/git --git-dir=$HOME/.unix_configs/ --work-tree=$HOME
 alias uc unix_configs $*
 
 # Emacs
-alias ec emacsclient $*
+alias vim emacsclient $*
+
+# MPV
+alias mpvd mpv --player-operation-mode=pseudo-gui $*

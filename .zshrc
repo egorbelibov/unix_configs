@@ -16,3 +16,6 @@ PATH=/opt/local/bin:/opt/local/sbin:"$PATH"
 # other
 PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH
+
+# Vim Mode (ZSH)
+bindkey -v
