@@ -19,6 +19,12 @@ You know, all the conventional stuff…
  user-mail-address "egor@belibov.dev")
 #+end_src
 
+*** Secrets
+Don't peek mate -_-
+#+begin_src emacs-lisp
+(load-file "~/.private.el")
+#+end_src
+
 ** Sweat Defaults
 #+BEGIN_QUOTE
 We either live with intention or exist by default.
@@ -71,7 +77,6 @@ Make Renaming File + Buffer easy
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 #+end_src
-
 
 *** Performance Boosters
 Let's put some thrusters on the back of this "Roadster".
@@ -174,6 +179,26 @@ Life-time savers (kinda).
    :desc "Downloads"    "d" (cmd! (find-file "~/Downloads"))
    :desc "Tmp"          "t" (cmd! (find-file "/tmp"))
    :desc "Home"         "h" (cmd! (find-file "~")))))
+#+end_src
+
+*** Counsel
+#+begin_src emacs-lisp
+(map!
+ :leader
+ (:prefix-map ("c" . "code")
+  (:prefix-map ("b" . "Counsel")
+   :desc "Find" "/" 'counsel-dash
+   :desc "Find (by Cursor)" "." 'counsel-dash-at-point
+   :desc "Activate Doc in Buffer" "a" 'counsel-dash-activate-docset
+   :desc "Deactivate Doc to Buffer" "d" 'counsel-dash-deactivate-docset)))
+#+end_src
+
+*** Ivy-Youtube
+#+begin_src emacs-lisp
+(map!
+ :leader
+ (:prefix-map ("s" . "search")
+   :desc "Youtube" "y" 'ivy-youtube))
 #+end_src
 
 ** Package Stack
@@ -304,6 +329,11 @@ Who doesn't read EPUBs?
   (setq nov-save-place-file (concat doom-cache-dir "nov-places")))
 #+end_src
 
+Yoututbe in Emacs (F#CK those wanky algorithms)
+#+begin_src emacs-lisp
+(package! ivy-youtube)
+#+end_src
+
 **** Language Support
 If it ain't useful and fast, why bother?
 
@@ -415,6 +445,22 @@ All about those projects.
 #+BEGIN_SRC emacs-lisp
 (setq projectile-project-search-path '("~/main/"))
 #+END_SRC
+
+*** Ivy-Youtube
+Browse consciously.
+#+begin_src emacs-lisp
+(setq ivy-youtube-key youtube-key
+      ivy-youtube-play-at "/usr/local/bin/mpv")
+#+end_src
+
+*** IRC Circle Config
+#+begin_src emacs-lisp
+(setq circe-network-options
+      '(("Freenode"
+         :nick "egorbelibov"
+         :channels ("#haskell" "#haskell-blah" "haskell-web" "#elm" "#emacs")
+         :nickserv-password "bBgWkpS9zLGL2w^sT5G%S&$nG6FCuv4#x&VyngB&TFR5*Z#Yzi2Kn%46NdjpJ@$ek9sxnaG@zR282ZTh")))
+#+end_src
 
 ** Language Configuration
 Talk is cheap. Show me the code.
@@ -548,16 +594,4 @@ The answer to the universe is 42.
 (add-hook 'html-mode-hook (lambda () (setq-local counsel-dash-docsets '("JavaScript" "HTML" "CSS"))))
 (add-hook 'css-mode-hook (lambda () (setq-local counsel-dash-docsets '("CSS"))))
 (add-hook 'sql-mode-hook (lambda () (setq-local counsel-dash-docsets '("CouchDB" "PostgreSQL"))))
-#+end_src
-
-Counsel Bindings
-#+begin_src emacs-lisp
-(map!
- :leader
- (:prefix-map ("c" . "code")
-  (:prefix-map ("b" . "Counsel")
-   :desc "Find" "/" 'counsel-dash
-   :desc "Find (by Cursor)" "." 'counsel-dash-at-point
-   :desc "Activate Doc in Buffer" "a" 'counsel-dash-activate-docset
-   :desc "Deactivate Doc to Buffer" "d" 'counsel-dash-deactivate-docset)))
 #+end_src

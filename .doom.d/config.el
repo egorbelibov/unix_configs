@@ -4,6 +4,8 @@
  user-full-name "Egor Belibov"
  user-mail-address "egor@belibov.dev")
 
+(load-file "~/.private.el")
+
 (setq-default
  delete-by-moving-to-trash t
  line-number-mode 1 ;; (modeline)
@@ -99,6 +101,20 @@
    :desc "Tmp"          "t" (cmd! (find-file "/tmp"))
    :desc "Home"         "h" (cmd! (find-file "~")))))
 
+(map!
+ :leader
+ (:prefix-map ("c" . "code")
+  (:prefix-map ("b" . "Counsel")
+   :desc "Find" "/" 'counsel-dash
+   :desc "Find (by Cursor)" "." 'counsel-dash-at-point
+   :desc "Activate Doc in Buffer" "a" 'counsel-dash-activate-docset
+   :desc "Deactivate Doc to Buffer" "d" 'counsel-dash-deactivate-docset)))
+
+(map!
+ :leader
+ (:prefix-map ("s" . "search")
+   :desc "Youtube" "y" 'ivy-youtube))
+
 (setq calc-angle-mode 'rad
       calc-algebraic-mode t ;; allows '2*x instead of 'x<RET>2*
       calc-symbolic-mode t) ;; keeps stuff like √2 irrational for as long as possible
@@ -140,6 +156,15 @@
         org-journal-dir (file-truename "~/main/egorbelibov/data/braindump/private")))
 
 (setq projectile-project-search-path '("~/main/"))
+
+(setq ivy-youtube-key youtube-key
+      ivy-youtube-play-at "/usr/local/bin/mpv")
+
+(setq circe-network-options
+      '(("Freenode"
+         :nick "egorbelibov"
+         :channels ("#haskell" "#haskell-blah" "haskell-web" "#elm" "#emacs")
+         :nickserv-password "bBgWkpS9zLGL2w^sT5G%S&$nG6FCuv4#x&VyngB&TFR5*Z#Yzi2Kn%46NdjpJ@$ek9sxnaG@zR282ZTh")))
 
 (setq org-directory "~/.org"
       org-log-done 'time
@@ -232,12 +257,3 @@
 (add-hook 'html-mode-hook (lambda () (setq-local counsel-dash-docsets '("JavaScript" "HTML" "CSS"))))
 (add-hook 'css-mode-hook (lambda () (setq-local counsel-dash-docsets '("CSS"))))
 (add-hook 'sql-mode-hook (lambda () (setq-local counsel-dash-docsets '("CouchDB" "PostgreSQL"))))
-
-(map!
- :leader
- (:prefix-map ("c" . "code")
-  (:prefix-map ("b" . "Counsel")
-   :desc "Find" "/" 'counsel-dash
-   :desc "Find (by Cursor)" "." 'counsel-dash-at-point
-   :desc "Activate Doc in Buffer" "a" 'counsel-dash-activate-docset
-   :desc "Deactivate Doc to Buffer" "d" 'counsel-dash-deactivate-docset)))
