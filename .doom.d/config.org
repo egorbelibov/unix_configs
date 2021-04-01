@@ -198,7 +198,15 @@ Life-time savers (kinda).
 (map!
  :leader
  (:prefix-map ("s" . "search")
-   :desc "Youtube" "y" 'ivy-youtube))
+  :desc "Youtube" "y" 'ivy-youtube))
+#+end_src
+
+*** Org-Roam
+#+begin_src emacs-lisp
+(map!
+ :leader
+ (:prefix-map ("t" . "toggle")
+  :desc "Org-Roam Buffer" "o" 'org-roam-buffer-toggle-display))
 #+end_src
 
 ** Package Stack
@@ -453,12 +461,12 @@ Browse consciously.
       ivy-youtube-play-at "/usr/local/bin/mpv")
 #+end_src
 
-*** IRC Circle Config
+*** IRC Circe Config
 #+begin_src emacs-lisp
 (setq circe-network-options
       '(("Freenode"
          :nick "egorbelibov"
-         :channels ("#haskell" "#haskell-blah" "haskell-web" "#elm" "#emacs")
+         :channels (:after-auth "#haskell" "#haskell-begginers" "#haskell-blah" "#haskell-web" "#elm" "#emacs")
          :nickserv-password "bBgWkpS9zLGL2w^sT5G%S&$nG6FCuv4#x&VyngB&TFR5*Z#Yzi2Kn%46NdjpJ@$ek9sxnaG@zR282ZTh")))
 #+end_src
 

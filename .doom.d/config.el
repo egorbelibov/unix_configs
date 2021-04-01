@@ -113,7 +113,12 @@
 (map!
  :leader
  (:prefix-map ("s" . "search")
-   :desc "Youtube" "y" 'ivy-youtube))
+  :desc "Youtube" "y" 'ivy-youtube))
+
+(map!
+ :leader
+ (:prefix-map ("t" . "toggle")
+  :desc "Org-Roam Buffer" "o" 'org-roam-buffer-toggle-display))
 
 (setq calc-angle-mode 'rad
       calc-algebraic-mode t ;; allows '2*x instead of 'x<RET>2*
@@ -163,7 +168,7 @@
 (setq circe-network-options
       '(("Freenode"
          :nick "egorbelibov"
-         :channels ("#haskell" "#haskell-blah" "haskell-web" "#elm" "#emacs")
+         :channels (:after-auth "#haskell" "#haskell-begginers" "#haskell-blah" "#haskell-web" "#elm" "#emacs")
          :nickserv-password "bBgWkpS9zLGL2w^sT5G%S&$nG6FCuv4#x&VyngB&TFR5*Z#Yzi2Kn%46NdjpJ@$ek9sxnaG@zR282ZTh")))
 
 (setq org-directory "~/.org"
