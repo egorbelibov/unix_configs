@@ -48,7 +48,7 @@
  doom-font (font-spec :family "Hack" :size 12)
  doom-big-font (font-spec :family "Hack" :size 12)
  doom-variable-pitch-font (font-spec :family "Hack" :size 12)
- doom-serif-font (font-spec :family "Times New Roman"))
+ doom-serif-font (font-spec :family "Hack" :size 12))
 
 ;; (load-theme 'eb-dark t)
 ;; (load-theme 'eb-light t)
@@ -165,7 +165,7 @@
 (setq ivy-youtube-key youtube-key
       ivy-youtube-play-at "/usr/local/bin/mpv")
 
-;; (setq circe-network-options
+ ;; (setq circe-network-options
  ;;      '(("Freenode"
  ;;         :nick "egorbelibov"
  ;;         :channels (:after-auth "#c1" "c2" "c3")
