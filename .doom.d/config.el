@@ -71,6 +71,8 @@
    mode-line-frame-identification
    mode-line-buffer-identification
    "   "
+   "<ETC?>" ;; ETC Reminder (Easier To Change)
+   "   "
    mode-line-position
    (vc-mode vc-mode)
    "  "
