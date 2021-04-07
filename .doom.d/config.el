@@ -165,11 +165,12 @@
 (setq ivy-youtube-key youtube-key
       ivy-youtube-play-at "/usr/local/bin/mpv")
 
-(setq circe-network-options
-      '(("Freenode"
-         :nick "egorbelibov"
-         :channels (:after-auth "#haskell" "#haskell-begginers" "#haskell-blah" "#haskell-web" "#elm" "#emacs")
-         :nickserv-password "bBgWkpS9zLGL2w^sT5G%S&$nG6FCuv4#x&VyngB&TFR5*Z#Yzi2Kn%46NdjpJ@$ek9sxnaG@zR282ZTh")))
+;; (setq circe-network-options
+ ;;      '(("Freenode"
+ ;;         :nick "egorbelibov"
+ ;;         :channels (:after-auth "#c1" "c2" "c3")
+ ;;         :nickserv-password "¯\_(ツ)_/¯")))
+(load-file "~/.doom.d/circe-private-config.el")
 
 (setq org-directory "~/.org"
       org-log-done 'time
