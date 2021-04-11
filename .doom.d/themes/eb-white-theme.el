@@ -62,9 +62,12 @@
   ;; --- Extra Faces Options ------------------------
   (
    (cursor :background fg)
+   (mc/cursor-bar-face :foreground "#ffffff")
 
    (lazy-highlight :background base3
                    :foreground fg)
+
+   (speed-type-correct :foreground base6)
 
    (evil-snipe-first-match-face :foreground fg)
 
