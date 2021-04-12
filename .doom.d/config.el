@@ -167,7 +167,7 @@
 (setq ivy-youtube-key youtube-key
       ivy-youtube-play-at "/usr/local/bin/mpv")
 
- ;; (setq circe-network-options
+;; (setq circe-network-options
  ;;      '(("Freenode"
  ;;         :nick "egorbelibov"
  ;;         :channels (:after-auth "#c1" "c2" "c3")
