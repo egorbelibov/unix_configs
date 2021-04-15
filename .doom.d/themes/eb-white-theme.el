@@ -74,6 +74,9 @@
    (company-tooltip-selection :background base0)
    (company-template-field :background "#000000")
 
+   (lsp-ui-peek-highlight :background bg-alt :foreground fg)
+   (lsp-ui-peek-header :background fg-alt :foreground bg)
+
    (elscreen-tab-other-screen-face :background "#353a42"
                                    :foreground "#1e2022")
 
