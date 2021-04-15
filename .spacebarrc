@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
-spacebar -m config text_font         "Hack:Regular:12.0"
-spacebar -m config icon_font         "Hack:Bold:12.0"
-spacebar -m config background_color  0x15000000
+spacebar -m config text_font         "JetBrains Mono:SemiLight:12.0"
+spacebar -m config icon_font         "JetBrains Mono:Bold:12.0"
+spacebar -m config background_color  0x08000000
 spacebar -m config foreground_color  0xff556b72
 spacebar -m config space_icon_color  0xffef5050
 spacebar -m config space_icon_strip  I II III IV V VI VII VIII IX X XI XII XIII XIV XV

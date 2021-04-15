@@ -45,10 +45,10 @@
 (global-so-long-mode 1)
 
 (setq
- doom-font (font-spec :family "Hack" :size 12)
- doom-big-font (font-spec :family "Hack" :size 12)
- doom-variable-pitch-font (font-spec :family "Hack" :size 12)
- doom-serif-font (font-spec :family "Hack" :size 12))
+ doom-font (font-spec :family "JetBrains Mono" :size 12)
+ doom-big-font (font-spec :family "JetBrains Mono" :size 12)
+ doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 12)
+ doom-serif-font (font-spec :family "JetBrains Mono" :size 12))
 
 ;; (load-theme 'eb-dark t)
 ;; (load-theme 'eb-light t)
