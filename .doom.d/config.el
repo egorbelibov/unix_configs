@@ -120,7 +120,8 @@
 (map!
  :leader
  (:prefix-map ("t" . "toggle")
-  :desc "Org-Roam Buffer" "o" 'org-roam-buffer-toggle-display))
+  :desc "Org-Roam Buffer" "o" 'org-roam-buffer-toggle-display
+  :desc "Composition Mode (Ligatures)" "c" 'toggle-auto-composition))
 
 (setq calc-angle-mode 'rad
       calc-algebraic-mode t ;; allows '2*x instead of 'x<RET>2*
