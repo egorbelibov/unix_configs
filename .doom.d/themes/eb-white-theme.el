@@ -56,7 +56,7 @@
    (vc-deleted     red)
 
    ;; custom categories
-   (hidden `(,(car bg) "black" "black"))
+   (hidden `(,(car base1)))
   )
 
   ;; --- Extra Faces Options ------------------------

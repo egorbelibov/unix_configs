@@ -461,6 +461,11 @@ All about those projects.
 (setq projectile-project-search-path '("~/main/"))
 #+END_SRC
 
+*** Ligatures
+#+begin_src emacs-lisp
+(setq +ligatures-in-modes '(not org-mode special-mode comint-mode eshell-mode term-mode vterm-mode))
+#+end_src
+
 *** Ivy-Youtube
 Browse consciously.
 #+begin_src emacs-lisp
