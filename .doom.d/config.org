@@ -464,7 +464,7 @@ All about those projects.
 
 *** Ligatures
 #+begin_src emacs-lisp
-(setq +ligatures-in-modes '(not org-mode special-mode comint-mode eshell-mode term-mode vterm-mode))
+(setq +ligatures-in-modes '(not org-mode special-mode))
 #+end_src
 
 *** Ivy-Youtube
