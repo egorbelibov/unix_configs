@@ -13,6 +13,8 @@ PATH=/usr/bin:/bin:/usr/sbin:/sbin
 PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
 # add MacPorts to PATH
 PATH=/opt/local/bin:/opt/local/sbin:"$PATH"
+# Haskell Binaries
+PATH="$HOME/.local/bin:$PATH"
 # other
 PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH
