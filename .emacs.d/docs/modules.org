@@ -95,6 +95,7 @@ Modules that reconfigure or augment packages or features built into Emacs.
 Modules that bring support for a language or group of languages to Emacs.
 
 + [[file:../modules/lang/agda/README.org][agda]] =+local= - TODO
++ [[file:../modules/lang/beancount/README.org][beancount]] =+lsp= - TODO
 + [[file:../modules/lang/cc/README.org][cc]] =+lsp= - TODO
 + [[file:../modules/lang/clojure/README.org][clojure]] =+lsp= - TODO
 + common-lisp - TODO
@@ -143,7 +144,7 @@ Modules that bring support for a language or group of languages to Emacs.
 + [[file:../modules/lang/ruby/README.org][ruby]] =+lsp +rvm +rbenv +rails +chruby=
 + [[file:../modules/lang/rust/README.org][rust]] =+lsp= - TODO
 + scala =+lsp= - TODO
-+ [[file:../modules/lang/scheme/README.org][scheme]] - TODO
++ [[file:../modules/lang/scheme/README.org][scheme]] =+chez +chibi +chicken +gambit +gauche +guile +kawa +mit +racket= - TODO
 + [[file:../modules/lang/sh/README.org][sh]] =+fish +lsp +powershell= - TODO
 + [[file:../modules/lang/sml/README.org][sml]] - TODO
 + [[file:../modules/lang/solidity/README.org][solidity]] - TODO
@@ -151,6 +152,7 @@ Modules that bring support for a language or group of languages to Emacs.
 + terra - TODO
 + web =+lsp= - HTML and CSS (SCSS/SASS/LESS/Stylus) support.
 + [[file:../modules/lang/yaml/README.org][yaml]] =+lsp= - TODO
++ [[file:../modules/lang/zig/README.org][zig]] =+lsp= - Zig support.
 
 
 * :os

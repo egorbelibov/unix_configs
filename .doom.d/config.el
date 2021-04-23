@@ -165,7 +165,7 @@
 
 (setq projectile-project-search-path '("~/main/"))
 
-(setq +ligatures-in-modes '(not org-mode special-mode comint-mode eshell-mode term-mode vterm-mode))
+(setq +ligatures-in-modes '(not org-mode special-mode))
 
 (setq ivy-youtube-key youtube-key
       ivy-youtube-play-at "/usr/local/bin/mpv")
