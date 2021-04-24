@@ -7,6 +7,9 @@ source ~/.aliases
 # GPG Daemon
 export GPG_TTY=$(tty)
 
+# Vim Mode (ZSH)
+bindkey -v
+
 # Set-up $PATH
 PATH=/usr/bin:/bin:/usr/sbin:/sbin
 # add custom, local installations to PATH
@@ -19,5 +22,5 @@ PATH="$HOME/.local/bin:$PATH"
 PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH
 
-# Vim Mode (ZSH)
-bindkey -v
+# ghcup-env
+[ -f "/Users/65676f72/.ghcup/env" ] && source "/Users/65676f72/.ghcup/env"
