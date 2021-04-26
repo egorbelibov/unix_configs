@@ -167,6 +167,28 @@
 
 (setq +ligatures-in-modes '(not org-mode special-mode))
 
+(setq +lookup-open-url-fn #'eww)
+
+(setq +lookup-provider-url-alist
+      '(
+        ("Doom Emacs issues" "https://github.com/hlissner/doom-emacs/issues?q=is%%3Aissue+%s")
+        ("Google" +lookup--online-backend-google "https://google.com/search?q=%s")
+        ("Google images" "https://www.google.com/images?q=%s")
+        ("Google maps" "https://maps.google.com/maps?q=%s")
+        ("Project Gutenberg" "http://www.gutenberg.org/ebooks/search/?query=%s")
+        ("DuckDuckGo" +lookup--online-backend-duckduckgo "https://duckduckgo.com/?q=%s")
+        ("DevDocs.io" "https://devdocs.io/#q=%s")
+        ("StackOverflow" "https://stackoverflow.com/search?q=%s")
+        ("Github" "https://github.com/search?ref=simplesearch&q=%s")
+        ("Youtube" "https://youtube.com/results?aq=f&oq=&search_query=%s")
+        ("Wolfram alpha" "https://wolframalpha.com/input/?i=%s")
+        ("Wikipedia" "https://wikipedia.org/search-redirect.php?language=en&go=Go&search=%s")
+        ("MDN" "https://developer.mozilla.org/en-US/search?q=%s")
+        ("Rust Docs" "https://doc.rust-lang.org/std/?search=%s")
+        ("Hoogle" "https://hoogle.haskell.org/?hoogle=%s")
+        )
+      )
+
 (setq ivy-youtube-key youtube-key
       ivy-youtube-play-at "/usr/local/bin/mpv")
 
