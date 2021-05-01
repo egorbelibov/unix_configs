@@ -5,15 +5,15 @@
 
 # Space commands
 ## Create space, set index(last), change focus to space[index]
-ctrl + cmd - n : yabai -m space --create; and \
-		 set -l index (yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index'); and \
-                 yabai -m space --focus $index
+ctrl + cmd - n : yabai -m space --create && \
+                 index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
+                 yabai -m space --focus "${index}"
 
 ## Create space, set index(last), move window to space[index], change focus to space[index]
-shift + ctrl + cmd - n : yabai -m space --create; and \
-			 set -l index (yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index'); and \
-                 	 yabai -m window --space $index; and \
-                 	 yabai -m space --focus $index
+shift + ctrl + cmd - n : yabai -m space --create && \
+                         index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
+                         yabai -m window --space "${index}" && \
+                         yabai -m space --focus "${index}"
 
 ## Destroy current space, set index(last), change focus to index(last)
 ctrl + cmd - q : yabai -m space --destroy
