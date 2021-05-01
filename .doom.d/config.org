@@ -471,7 +471,7 @@ Make it click.
 *** Lookup
 All the www is at my fingertips.
 #+begin_src emacs-lisp
-(setq +lookup-open-url-fn #'eww)
+(setq-default +lookup-open-url-fn #'eww)
 #+end_src
 
 Search engines

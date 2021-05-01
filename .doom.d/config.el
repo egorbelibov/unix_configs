@@ -167,7 +167,7 @@
 
 (setq +ligatures-in-modes '(not org-mode special-mode))
 
-(setq +lookup-open-url-fn #'eww)
+(setq-default +lookup-open-url-fn #'eww)
 
 (setq +lookup-provider-url-alist
       '(
