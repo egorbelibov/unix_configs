@@ -35,10 +35,7 @@ Must be a `font-spec', a font object, an XFT font string, or an XLFD string. See
 
 An omitted font size means to inherit `doom-font''s size.")
 
-(defvar doom-unicode-font
-  (if IS-MAC
-      (font-spec :family "Apple Color Emoji")
-    (font-spec :family "Symbola"))
+(defvar doom-unicode-font nil
   "Fallback font for Unicode glyphs.
 Must be a `font-spec', a font object, an XFT font string, or an XLFD string. See
 `doom-font' for examples.
@@ -47,8 +44,17 @@ The defaults on macOS and Linux are Apple Color Emoji and Symbola, respectively.
 
 An omitted font size means to inherit `doom-font''s size.")
 
-(defvar doom-unicode-extra-fonts nil
-  "Fonts to inject into the Unicode charset before `doom-unicode-font'.")
+(defvar doom-emoji-fallback-font-families
+  '("Apple Color Emoji"
+    "Segoe UI Emoji"
+    "Noto Color Emoji"
+    "Noto Emoji")
+  "A list of fallback font families to use for emojis.")
+
+(defvar doom-symbol-fallback-font-families
+  '("Segoe UI Symbol"
+    "Apple Symbols")
+  "A list of fallback font families for general symbol glyphs.")
 
 
 ;;
@@ -156,8 +162,12 @@ or if the current buffer is read-only or not file-visiting."
 ;;
 ;;; General UX
 
-;; Simpler confirmation prompt when killing Emacs
+;; A simple confirmation prompt when killing Emacs. But only prompt when there
+;; are real buffers open.
 (setq confirm-kill-emacs #'doom-quit-p)
+;; Prompt for confirmation when deleting a non-empty frame; a last line of
+;; defense against accidental loss of work.
+(global-set-key [remap delete-frame] #'doom/delete-frame-with-prompt)
 
 ;; Don't prompt for confirmation when we create a new file or buffer (assume the
 ;; user knows what they're doing).
@@ -286,12 +296,16 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
 (setq frame-resize-pixelwise t)
 
 ;; But do not resize windows pixelwise, this can cause crashes in some cases
-;; where we resize windows too quickly.
+;; when resizing too many windows at once or rapidly.
 (setq window-resize-pixelwise nil)
 
 ;; Disable tool, menu, and scrollbars. Doom is designed to be keyboard-centric,
 ;; so these are just clutter (the scrollbar also impacts performance). Whats
 ;; more, the menu bar exposes functionality that Doom doesn't endorse.
+;;
+;; I am intentionally avoid using `menu-bar-mode', `tool-bar-mode', and
+;; `scroll-bar-mode' because they do extra and unnecessary work that can be more
+;; concisely, and efficiently, expressed with these six lines:
 (push '(menu-bar-lines . 0)   default-frame-alist)
 (push '(tool-bar-lines . 0)   default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
@@ -310,21 +324,18 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
       window-divider-default-right-width 1)
 (add-hook 'doom-init-ui-hook #'window-divider-mode)
 
-;; Prompt for confirmation when deleting a non-empty frame; a last line of
-;; defense against accidental loss of work.
-(global-set-key [remap delete-frame] #'doom/delete-frame-with-prompt)
-
-;; always avoid GUI
+;; GUIs are inconsistent across systems and themes (and will rarely match our
+;; active Emacs theme). They impose inconsistent shortcut key paradigms too.
+;; It's best to avoid GUIs altogether and have Emacs handle the prompting, since
+;; its promtps are governed by the same rules and keybinds as the rest of Emacs.
 (setq use-dialog-box nil)
-;; Don't display floating tooltips; display their contents in the echo-area,
-;; because native tooltips are ugly.
 (when (bound-and-true-p tooltip-mode)
   (tooltip-mode -1))
-;; ...especially on linux
 (when IS-LINUX
   (setq x-gtk-use-system-tooltips nil))
 
- ;; Favor vertical splits over horizontal ones. Screens are usually wide.
+ ;; Favor vertical splits over horizontal ones. Monitors are trending toward
+ ;; wide, rather than tall.
 (setq split-width-threshold 160
       split-height-threshold nil)
 
@@ -347,8 +358,7 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
 ;; Typing yes/no is obnoxious when y/n will do
 (fset #'yes-or-no-p #'y-or-n-p)
 
-;; Try really hard to keep the cursor from getting stuck in the read-only prompt
-;; portion of the minibuffer.
+;; Try to keep the cursor out of the read-only portions of the minibuffer.
 (setq minibuffer-prompt-properties '(read-only t intangible t cursor-intangible t face minibuffer-prompt))
 (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
@@ -484,13 +494,16 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
              all-the-icons-material
              all-the-icons-alltheicon)
   :preface
-  (setq doom-unicode-extra-fonts
-        (list "Weather Icons"
-              "github-octicons"
-              "FontAwesome"
-              "all-the-icons"
-              "file-icons"
-              "Material Icons"))
+  (add-hook! 'after-setting-font-hook
+    (defun doom-init-all-the-icons-fonts-h ()
+      (when (fboundp 'set-fontset-font)
+        (dolist (font (list "Weather Icons"
+                            "github-octicons"
+                            "FontAwesome"
+                            "all-the-icons"
+                            "file-icons"
+                            "Material Icons"))
+          (set-fontset-font t 'unicode font nil 'append)))))
   :config
   (cond ((daemonp)
          (defadvice! doom--disable-all-the-icons-in-tty-a (orig-fn &rest args)
@@ -575,44 +588,34 @@ behavior). Do not set this directly, this is let-bound in `doom-init-theme-h'.")
 
 (defun doom-init-fonts-h ()
   "Loads `doom-font'."
+  (when (fboundp 'set-fontset-font)
+    (let ((fn (doom-rpartial #'member (font-family-list))))
+      (when-let (font (cl-find-if fn doom-symbol-fallback-font-families))
+        (set-fontset-font t 'symbol font))
+      (when-let (font (cl-find-if fn doom-emoji-fallback-font-families))
+        (set-fontset-font t 'unicode font))
+      (when doom-unicode-font
+        (set-fontset-font t 'unicode doom-unicode-font))))
+  (apply #'custom-theme-set-faces 'doom
+         (append (when doom-font
+                   `((fixed-pitch ((t (:font ,doom-font))))))
+                 (when doom-serif-font
+                   `((fixed-pitch-serif ((t (:font ,doom-serif-font))))))
+                 (when doom-variable-pitch-font
+                   `((variable-pitch ((t (:font ,doom-variable-pitch-font))))))))
   (cond
    (doom-font
-    (cl-pushnew
-     ;; Avoiding `set-frame-font' because it does a lot of extra, expensive
-     ;; work we can avoid by setting the font frame parameter instead.
-     (cons 'font
-           (cond ((stringp doom-font) doom-font)
-                 ((fontp doom-font) (font-xlfd-name doom-font))
-                 ((signal 'wrong-type-argument (list '(fontp stringp)
-                                                     doom-font)))))
-     default-frame-alist
-     :key #'car :test #'eq))
+    ;; I avoid `set-frame-font' because it does a lot of extra, expensive work
+    ;; we can avoid by setting the font frame parameter directly.
+    (setf (alist-get 'font default-frame-alist)
+          (cond ((stringp doom-font) doom-font)
+                ((fontp doom-font) (font-xlfd-name doom-font))
+                ((signal 'wrong-type-argument (list '(fontp stringp)
+                                                    doom-font))))))
    ((display-graphic-p)
-    ;; We try our best to record your system font, so `doom-big-font-mode'
-    ;; can still use it to compute a larger font size with.
-    (setq font-use-system-font t
-          doom-font (face-attribute 'default :font)))))
-
-(defun doom-init-extra-fonts-h (&optional frame)
-  "Loads `doom-variable-pitch-font',`doom-serif-font' and `doom-unicode-font'."
-  (condition-case e
-      (with-selected-frame (or frame (selected-frame))
-        (when doom-font
-          (set-face-attribute 'fixed-pitch nil :font doom-font))
-        (when doom-serif-font
-          (set-face-attribute 'fixed-pitch-serif nil :font doom-serif-font))
-        (when doom-variable-pitch-font
-          (set-face-attribute 'variable-pitch nil :font doom-variable-pitch-font))
-        (when (fboundp 'set-fontset-font)
-          (dolist (font (remq nil (cons doom-unicode-font doom-unicode-extra-fonts)))
-            (set-fontset-font t 'unicode font nil 'prepend)))
-        (run-hooks 'after-setting-font-hook))
-    ((debug error)
-     (if (string-prefix-p "Font not available: " (error-message-string e))
-         (lwarn 'doom-ui :warning
-                "Could not find the '%s' font on your system, falling back to system font"
-                (font-get (caddr e) :family))
-       (signal 'doom-error e)))))
+    (setq font-use-system-font t)))
+  ;; Give users a chance to inject their own font logic.
+  (run-hooks 'after-setting-font-hook))
 
 (defun doom-init-theme-h (&optional frame)
   "Load the theme specified by `doom-theme' in FRAME."
@@ -675,7 +678,11 @@ This offers a moderate boost in startup (or theme switch) time, so long as
 
 (defun doom-init-ui-h ()
   "Initialize Doom's user interface by applying all its advice and hooks."
-  (run-hook-wrapped 'doom-init-ui-hook #'doom-try-run-hook)
+  ;; Produce more helpful (and visible) error messages from errors emitted from
+  ;; hooks (particularly mode hooks, that usually go unnoticed otherwise.
+  (advice-add #'run-hooks :override #'doom-run-hooks)
+
+  (doom-run-hooks 'doom-init-ui-hook)
 
   (add-hook 'kill-buffer-query-functions #'doom-protect-fallback-buffer-h)
   (add-hook 'after-change-major-mode-hook #'doom-highlight-non-default-indentation-h 'append)
@@ -697,7 +704,6 @@ This offers a moderate boost in startup (or theme switch) time, so long as
 
 ;; Apply `doom-font' et co
 (add-hook 'doom-after-init-modules-hook #'doom-init-fonts-h)
-(add-hook 'doom-load-theme-hook #'doom-init-extra-fonts-h)
 
 ;; Apply `doom-theme'
 (add-hook (if (daemonp)
@@ -724,8 +730,9 @@ This offers a moderate boost in startup (or theme switch) time, so long as
   (put sym 'disabled "Doom doesn't support `customize', configure Emacs from $DOOMDIR/config.el instead"))
 (put 'customize-themes 'disabled "Set `doom-theme' or use `load-theme' in $DOOMDIR/config.el instead")
 
-;; Doesn't exist in terminal Emacs, so we define it to prevent void-function
-;; errors emitted from packages that blindly try to use it.
+;; Doesn't exist in terminal Emacs, but some Emacs packages (internal and
+;; external) use it anyway, leading to a void-function error, so define a no-op
+;; substitute to suppress them.
 (unless (fboundp 'define-fringe-bitmap)
   (fset 'define-fringe-bitmap #'ignore))
 
@@ -738,15 +745,17 @@ disable it to fix all that visual noise."
   (add-function :around whitespace-enable-predicate #'doom-disable-whitespace-mode-in-childframes-a))
 
 ;; Don't display messages in the minibuffer when using the minibuffer
-(defmacro doom-silence-motion-key (command key)
-  (let ((key-command (intern (format "doom/silent-%s" command))))
-    `(progn
-       (defun ,key-command ()
-         (interactive)
-         (ignore-errors (call-interactively ',command)))
-       (define-key minibuffer-local-map (kbd ,key) #',key-command))))
-(doom-silence-motion-key backward-delete-char "<backspace>")
-(doom-silence-motion-key delete-char "<delete>")
+;; DEPRECATED Remove when Emacs 26.x support is dropped.
+(eval-when! (not EMACS27+)
+  (defmacro doom-silence-motion-key (command key)
+    (let ((key-command (intern (format "doom/silent-%s" command))))
+      `(progn
+         (defun ,key-command ()
+           (interactive)
+           (ignore-errors (call-interactively ',command)))
+         (define-key minibuffer-local-map (kbd ,key) #',key-command))))
+  (doom-silence-motion-key backward-delete-char "<backspace>")
+  (doom-silence-motion-key delete-char "<delete>"))
 
 (provide 'core-ui)
 ;;; core-ui.el ends here

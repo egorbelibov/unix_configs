@@ -28,6 +28,15 @@ envvar will enable this at startup.")
 (defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
 (defconst IS-BSD     (or IS-MAC (eq system-type 'berkeley-unix)))
 
+;; Ensure Doom's core libraries are visible for loading
+(add-to-list 'load-path (file-name-directory load-file-name))
+
+;; Remember these variables' initial values, so we can safely reset them at a
+;; later time, or consult them without fear of contamination.
+(dolist (var '(exec-path load-path process-environment))
+  (unless (get var 'initial-value)
+    (put var 'initial-value (default-value var))))
+
 ;; Unix tools look for HOME, but this is normally not defined on Windows.
 (when (and IS-WINDOWS (null (getenv-internal "HOME")))
   (setenv "HOME" (getenv "USERPROFILE"))
@@ -51,6 +60,13 @@ envvar will enable this at startup.")
 (define-error 'doom-module-error "Error in a Doom module" 'doom-error)
 (define-error 'doom-private-error "Error in private config" 'doom-error)
 (define-error 'doom-package-error "Error with packages" 'doom-error)
+
+;;; Declare a psuedo theme to store faces and variables in, with no risk of it
+;;; getting saved to `custom-file', or accidentally overwritten by user config.
+(custom-declare-theme 'doom nil)
+(enable-theme 'doom)
+;; But immediately hide it, because it's not a real theme.
+(setq custom-enabled-themes (remq 'doom custom-enabled-themes))
 
 
 ;;
@@ -147,11 +163,6 @@ users).")
 ;;
 ;;; Native Compilation support (http://akrl.sdf.org/gccemacs.html)
 
-;; Prevent unwanted runtime builds in gccemacs (native-comp); packages are
-;; compiled ahead-of-time when they are installed and site files are compiled
-;; when gccemacs is installed.
-(setq comp-deferred-compilation nil)
-
 ;; Don't store eln files in ~/.emacs.d/eln-cache (they are likely to be purged
 ;; when upgrading Doom).
 (when (boundp 'comp-eln-load-path)
@@ -177,9 +188,6 @@ users).")
 
 ;;
 ;;; Core libraries
-
-;; Ensure Doom's core libraries are visible for loading
-(add-to-list 'load-path doom-core-dir)
 
 ;; Just the... bear necessities~
 (require 'subr-x)
@@ -377,8 +385,7 @@ config.el instead."
   "Run MODE-local-vars-hook after local variables are initialized."
   (unless doom-inhibit-local-var-hooks
     (setq-local doom-inhibit-local-var-hooks t)
-    (run-hook-wrapped (intern-soft (format "%s-local-vars-hook" major-mode))
-                      #'doom-try-run-hook)))
+    (doom-run-hooks (intern-soft (format "%s-local-vars-hook" major-mode)))))
 
 
 ;;
@@ -422,7 +429,8 @@ intervals."
   (if (not now)
       (appendq! doom-incremental-packages packages)
     (while packages
-      (let ((req (pop packages)))
+      (let* ((gc-cons-threshold most-positive-fixnum)
+             (req (pop packages)))
         (unless (featurep req)
           (doom-log "Incrementally loading %s" req)
           (condition-case-unless-debug e
@@ -431,12 +439,11 @@ intervals."
                     ;; or is unreadable, Emacs throws up file-missing errors, so
                     ;; we set it to a directory we know exists and is readable.
                     (let ((default-directory doom-emacs-dir)
-                          (gc-cons-threshold most-positive-fixnum)
                           file-name-handler-alist)
                       (require req nil t))
                     t)
                   (push req packages))
-            ((error debug)
+            (error
              (message "Failed to load %S package incrementally, because: %s"
                       req e)))
           (if (not packages)
@@ -461,17 +468,20 @@ If this is a daemon session, load them all immediately instead."
 ;;
 ;;; Bootstrap helpers
 
+(defun doom-finish-init-h ()
+  "Set `doom-init-time'."
+  (setq doom-init-time
+        (float-time (time-subtract (current-time) before-init-time))))
+
 (defun doom-display-benchmark-h (&optional return-p)
   "Display a benchmark including number of packages and modules loaded.
 
 If RETURN-P, return the message as a string instead of displaying it."
   (funcall (if return-p #'format #'message)
            "Doom loaded %d packages across %d modules in %.03fs"
-           (- (length load-path) (length doom--initial-load-path))
+           (- (length load-path) (length (get 'load-path 'initial-value)))
            (if doom-modules (hash-table-count doom-modules) 0)
-           (or doom-init-time
-               (setq doom-init-time
-                     (float-time (time-subtract (current-time) before-init-time))))))
+           (or doom-init-time (doom-finish-init-h))))
 
 (defun doom-load-envvars-file (file &optional noerror)
   "Read and set envvars from FILE.
@@ -494,16 +504,29 @@ unreadable. Returns the names of envvars that were changed."
              (default-value 'shell-file-name)))
         env))))
 
-(defun doom-try-run-hook (hook)
+(defun doom-run-hook (hook)
   "Run HOOK (a hook function) with better error handling.
 Meant to be used with `run-hook-wrapped'."
   (doom-log "Running doom hook: %s" hook)
-  (condition-case e
+  (condition-case-unless-debug e
       (funcall hook)
-    ((debug error)
+    (user-error
+     (warn "Warning: %s" (error-message-string e)))
+    (error
      (signal 'doom-hook-error (list hook e))))
   ;; return nil so `run-hook-wrapped' won't short circuit
   nil)
+
+(defun doom-run-hooks (&rest hooks)
+  "Run HOOKS (a list of hook variable symbols) with better error handling.
+Is used as advice to replace `run-hooks'."
+  (dolist (hook hooks)
+    (condition-case-unless-debug e
+        (run-hook-wrapped hook #'doom-run-hook)
+      (doom-hook-error
+       (unless debug-on-error
+         (lwarn hook :error "Error running hook %S because: %s" (cadr e) (caddr e)))
+       (signal 'doom-hook-error (cons hook (cdr e)))))))
 
 (defun doom-run-hook-on (hook-var trigger-hooks)
   "Configure HOOK-VAR to be invoked exactly once when any of the TRIGGER-HOOKS
@@ -517,29 +540,30 @@ TRIGGER-HOOK is a list of quoted hooks and/or sharp-quoted functions."
       (fset
        fn (lambda (&rest _)
             (when (and after-init-time
-                       ;; In some cases, hooks may be lexically unset to inhibit
-                       ;; them during expensive batch operations on buffers
-                       ;; (such as when processing buffers internally). In these
-                       ;; cases we should assume this hook wasn't invoked
-                       ;; interactively.
-                       (boundp hook)
-                       (symbol-value hook))
-              (run-hook-wrapped hook-var #'doom-try-run-hook)
+                       (or (daemonp)
+                           ;; In some cases, hooks may be lexically unset to
+                           ;; inhibit them during expensive batch operations on
+                           ;; buffers (such as when processing buffers
+                           ;; internally). In these cases we should assume this
+                           ;; hook wasn't invoked interactively.
+                           (and (boundp hook)
+                                (symbol-value hook))))
+              (doom-run-hooks hook-var)
               (set hook-var nil))))
-      ;; DEPRECATED This target switcheroo won't be necessary when 26 support is
-      ;;            dropped; `add-hook''s DEPTH argument was added in 27.1.
-      (let ((target (if (eq hook 'find-file-hook) 'after-find-file hook)))
-        (if (functionp target)
-            (advice-add target :before fn '((depth . -101)))
-          (add-hook target fn (if EMACS27+ -101)))))))
+      (cond ((daemonp)
+             ;; In a daemon session we don't need all these lazy loading
+             ;; shenanigans. Just load everything immediately.
+             (add-hook 'after-init-hook fn 'append))
+            ((eq hook 'find-file-hook)
+             ;; Advise `after-find-file' instead of use `find-file-hook' because
+             ;; the latter isn't triggered late enough.
+             (advice-add 'after-find-file :before fn '((depth . -101))))
+            ((add-hook hook fn (if EMACS27+ -101))))
+      fn)))
 
 
 ;;
 ;;; Bootstrapper
-
-(defvar doom--initial-exec-path exec-path)
-(defvar doom--initial-load-path load-path)
-(defvar doom--initial-process-environment process-environment)
 
 (defun doom-initialize (&optional force-p)
   "Bootstrap Doom, if it hasn't already (or if FORCE-P is non-nil).
@@ -573,21 +597,19 @@ to least)."
 
     ;; Reset as much state as possible, so `doom-initialize' can be treated like
     ;; a reset function. e.g. when reloading the config.
-    (setq-default exec-path doom--initial-exec-path
-                  load-path doom--initial-load-path
-                  process-environment doom--initial-process-environment)
+    (dolist (var '(exec-path load-path process-environment))
+      (set-default var (get var 'initial-value)))
 
     ;; Doom caches a lot of information in `doom-autoloads-file'. Module and
     ;; package autoloads, autodefs like `set-company-backend!', and variables
     ;; like `doom-modules', `doom-disabled-packages', `load-path',
     ;; `auto-mode-alist', and `Info-directory-list'. etc. Compiling them into
     ;; one place is a big reduction in startup time.
-    (condition-case e
+    (condition-case-unless-debug e
         ;; Avoid `file-name-sans-extension' for premature optimization reasons.
         ;; `string-remove-suffix' is cheaper because it performs no file sanity
         ;; checks; just plain ol' string manipulation.
-        (load (string-remove-suffix ".el" doom-autoloads-file)
-              nil 'nomessage)
+        (load (string-remove-suffix ".el" doom-autoloads-file) nil 'nomessage)
       (file-missing
        ;; If the autoloads file fails to load then the user forgot to sync, or
        ;; aborted a doom command midway!
@@ -598,6 +620,8 @@ to least)."
          (signal 'doom-error
                  (list "Doom is in an incomplete state"
                        "run 'doom sync' on the command line to repair it")))))
+
+    (if doom-debug-p (doom-debug-mode +1))
 
     ;; Load shell environment, optionally generated from 'doom env'. No need
     ;; to do so if we're in terminal Emacs, where Emacs correctly inherits
@@ -617,9 +641,6 @@ to least)."
     (eval-after-load 'package '(require 'core-packages))
     (eval-after-load 'straight '(doom-initialize-packages))
 
-    ;; Bootstrap our GC manager
-    (add-hook 'doom-first-buffer-hook #'gcmh-mode)
-
     ;; Bootstrap the interactive session
     (add-hook 'after-change-major-mode-hook #'doom-run-local-var-hooks-h)
     (add-hook 'emacs-startup-hook #'doom-load-packages-incrementally-h)
@@ -627,10 +648,9 @@ to least)."
     (doom-run-hook-on 'doom-first-buffer-hook '(find-file-hook doom-switch-buffer-hook))
     (doom-run-hook-on 'doom-first-file-hook   '(find-file-hook dired-initial-position-hook))
     (doom-run-hook-on 'doom-first-input-hook  '(pre-command-hook))
-    (if doom-debug-p (doom-debug-mode +1))
 
-    ;; Load core/core-*.el, the user's private init.el, then their config.el
-    (doom-initialize-modules force-p))
+    ;; Bootstrap our GC manager
+    (add-hook 'doom-first-buffer-hook #'gcmh-mode))
 
   doom-init-p)
 
