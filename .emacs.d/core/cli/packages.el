@@ -144,7 +144,7 @@ list remains lean."
 
 (defvar doom--eln-output-expected nil)
 
-(defvar doom--eln-output-path (car (bound-and-true-p comp-eln-load-path)))
+(defvar doom--eln-output-path (car (bound-and-true-p native-comp-eln-load-path)))
 
 (defun doom--eln-file-name (file)
   "Return the short .eln file name corresponding to `file'."
@@ -161,12 +161,12 @@ list remains lean."
   (concat doom--eln-output-path eln-name ".error"))
 
 (defun doom--find-eln-file (eln-name)
-  "Find `eln-name' on the `comp-eln-load-path'."
+  "Find `eln-name' on the `native-comp-eln-load-path'."
   (cl-some (lambda (eln-path)
              (let ((file (concat eln-path eln-name)))
                (when (file-exists-p file)
                  file)))
-           comp-eln-load-path))
+           native-comp-eln-load-path))
 
 (defun doom--elc-file-outdated-p (file)
   "Check whether the corresponding .elc for `file' is outdated."
@@ -263,7 +263,7 @@ declaration) or dependency thereof that hasn't already been."
   (print! (start "Installing packages..."))
   (let ((pinned (doom-package-pinned-list)))
     (print-group!
-     (add-hook 'comp-async-cu-done-hook #'doom--native-compile-done-h)
+     (add-hook 'native-comp-async-cu-done-functions #'doom--native-compile-done-h)
      (if-let (built
               (doom--with-package-recipes (doom-package-recipe-list)
                   (recipe package type local-repo)
@@ -314,7 +314,7 @@ declaration) or dependency thereof that hasn't already been."
           (or (if force-p :all straight--packages-to-rebuild)
               (make-hash-table :test #'equal)))
          (recipes (doom-package-recipe-list)))
-     (add-hook 'comp-async-cu-done-hook #'doom--native-compile-done-h)
+     (add-hook 'native-comp-async-cu-done-functions #'doom--native-compile-done-h)
      (unless force-p
        (straight--make-build-cache-available))
      (if-let (built

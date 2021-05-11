@@ -34,8 +34,14 @@ all themes. It will apply to all themes once they are loaded."
                (apply #'custom-theme-set-faces theme
                       (mapcan #'doom--custom-theme-set-face
                               (list ,@specs)))))))
-       (when (or doom-init-theme-p (null doom-theme))
+       ;; Apply the changes immediately if the user is using the default theme
+       ;; or the theme has already loaded. This allows you to evaluate these
+       ;; macros on the fly and customize your faces iteratively.
+       (when (or (get 'doom-theme 'previous-themes)
+                 (null doom-theme))
          (funcall #',fn))
+       ;; TODO Append to `doom-load-theme-hook' with DEPTH instead when Emacs
+       ;;      26.x support is dropped.
        (add-hook 'doom-customize-theme-hook #',fn 'append))))
 
 ;;;###autoload
@@ -53,10 +59,8 @@ doom-themes' API without worry."
   "Reload the current color theme."
   (interactive)
   (let ((themes (copy-sequence custom-enabled-themes)))
-    (mapc #'disable-theme custom-enabled-themes)
-    (dolist (theme themes)
-      (if (get theme 'theme-feature)
-          (load-theme theme t)
-        (enable-theme theme)))
-    (message "Reloaded themes: %s" (mapconcat #'prin1-to-string themes ", "))
-    (doom/reload-font)))
+    (load-theme doom-theme t)
+    (doom/reload-font)
+    (message "%s %s"
+             (propertize "Reloaded themes:" 'face 'bold)
+             (mapconcat #'prin1-to-string themes ", "))))

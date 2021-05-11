@@ -44,12 +44,9 @@ envvar will enable this at startup.")
 
 ;; Contrary to what many Emacs users have in their configs, you don't need more
 ;; than this to make UTF-8 the default coding system:
-(when (fboundp 'set-charset-priority)
-  (set-charset-priority 'unicode))       ; pretty
-(prefer-coding-system 'utf-8)            ; pretty
-(setq locale-coding-system 'utf-8)       ; please
-;; The clipboard's on Windows could be in a wider encoding than utf-8 (likely
-;; utf-16), so let Emacs/the OS decide what encoding to use there.
+(set-language-environment "UTF-8")
+;; ...but the clipboard's on Windows could be in another encoding (likely
+;; utf-16), so let Emacs/the OS decide what to use there.
 (unless IS-WINDOWS
   (setq selection-coding-system 'utf-8)) ; with sugar on top
 
@@ -60,13 +57,6 @@ envvar will enable this at startup.")
 (define-error 'doom-module-error "Error in a Doom module" 'doom-error)
 (define-error 'doom-private-error "Error in private config" 'doom-error)
 (define-error 'doom-package-error "Error with packages" 'doom-error)
-
-;;; Declare a psuedo theme to store faces and variables in, with no risk of it
-;;; getting saved to `custom-file', or accidentally overwritten by user config.
-(custom-declare-theme 'doom nil)
-(enable-theme 'doom)
-;; But immediately hide it, because it's not a real theme.
-(setq custom-enabled-themes (remq 'doom custom-enabled-themes))
 
 
 ;;
@@ -163,10 +153,29 @@ users).")
 ;;
 ;;; Native Compilation support (http://akrl.sdf.org/gccemacs.html)
 
+;; REVIEW Remove me after a couple weeks.
+(when (boundp 'comp-eln-load-path)
+  (defvaralias 'native-comp-eln-load-path 'comp-eln-load-path)
+  (defvaralias 'native-comp-warning-on-missing-source 'comp-warning-on-missing-source)
+  (defvaralias 'native-comp-driver-options 'comp-native-driver-options)
+  (defvaralias 'native-comp-async-query-on-exit 'comp-async-query-on-exit)
+  (defvaralias 'native-comp-async-report-warnings-errors 'comp-async-report-warnings-errors)
+  (defvaralias 'native-comp-async-env-modifier-form 'comp-async-env-modifier-form)
+  (defvaralias 'native-comp-async-all-done-hook 'comp-async-all-done-hook)
+  (defvaralias 'native-comp-async-cu-done-functions 'comp-async-cu-done-functions)
+  (defvaralias 'native-comp-async-jobs-number 'comp-async-jobs-number)
+  (defvaralias 'native-comp-never-optimize-functions 'comp-never-optimize-functions)
+  (defvaralias 'native-comp-bootstrap-deny-list 'comp-bootstrap-deny-list)
+  (defvaralias 'native-comp-always-compile 'comp-always-compile)
+  (defvaralias 'native-comp-verbose 'comp-verbose)
+  (defvaralias 'native-comp-debug 'comp-debug)
+  (defvaralias 'native-comp-speed 'comp-speed)
+  (defalias 'native-comp-limple-mode #'comp-limple-mode))
+
 ;; Don't store eln files in ~/.emacs.d/eln-cache (they are likely to be purged
 ;; when upgrading Doom).
-(when (boundp 'comp-eln-load-path)
-  (add-to-list 'comp-eln-load-path (concat doom-cache-dir "eln/")))
+(when (boundp 'native-comp-eln-load-path)
+  (add-to-list 'native-comp-eln-load-path (concat doom-cache-dir "eln/")))
 
 (with-eval-after-load 'comp
   ;; HACK Disable native-compilation for some troublesome packages
@@ -180,9 +189,9 @@ users).")
   ;; Default to using all cores, rather than half of them, since we compile
   ;; things ahead-of-time in a non-interactive session.
   (defun doom--comp-use-all-cores-a ()
-    (if (zerop comp-async-jobs-number)
+    (if (zerop native-comp-async-jobs-number)
         (setq comp-num-cpus (doom-system-cpus))
-      comp-async-jobs-number))
+      native-comp-async-jobs-number))
   (advice-add #'comp-effective-async-max-jobs :override #'doom--comp-use-all-cores-a))
 
 
@@ -530,15 +539,16 @@ Is used as advice to replace `run-hooks'."
 
 (defun doom-run-hook-on (hook-var trigger-hooks)
   "Configure HOOK-VAR to be invoked exactly once when any of the TRIGGER-HOOKS
-are invoked. Once HOOK-VAR is triggered, it is reset to nil.
+are invoked *after* Emacs has initialized (to reduce false positives). Once
+HOOK-VAR is triggered, it is reset to nil.
 
 HOOK-VAR is a quoted hook.
-
 TRIGGER-HOOK is a list of quoted hooks and/or sharp-quoted functions."
   (dolist (hook trigger-hooks)
     (let ((fn (intern (format "%s-init-on-%s-h" hook-var hook))))
       (fset
        fn (lambda (&rest _)
+            ;; Only trigger this after Emacs has initialized.
             (when (and after-init-time
                        (or (daemonp)
                            ;; In some cases, hooks may be lexically unset to
@@ -555,8 +565,9 @@ TRIGGER-HOOK is a list of quoted hooks and/or sharp-quoted functions."
              ;; shenanigans. Just load everything immediately.
              (add-hook 'after-init-hook fn 'append))
             ((eq hook 'find-file-hook)
-             ;; Advise `after-find-file' instead of use `find-file-hook' because
-             ;; the latter isn't triggered late enough.
+             ;; Advise `after-find-file' instead of using `find-file-hook'
+             ;; because the latter is triggered too late (after the file has
+             ;; opened and modes are all set up).
              (advice-add 'after-find-file :before fn '((depth . -101))))
             ((add-hook hook fn (if EMACS27+ -101))))
       fn)))
