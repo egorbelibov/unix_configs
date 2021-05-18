@@ -153,24 +153,28 @@ users).")
 ;;
 ;;; Native Compilation support (http://akrl.sdf.org/gccemacs.html)
 
-;; REVIEW Remove me after a couple weeks.
-(when (boundp 'comp-eln-load-path)
-  (defvaralias 'native-comp-eln-load-path 'comp-eln-load-path)
-  (defvaralias 'native-comp-warning-on-missing-source 'comp-warning-on-missing-source)
-  (defvaralias 'native-comp-driver-options 'comp-native-driver-options)
-  (defvaralias 'native-comp-async-query-on-exit 'comp-async-query-on-exit)
-  (defvaralias 'native-comp-async-report-warnings-errors 'comp-async-report-warnings-errors)
-  (defvaralias 'native-comp-async-env-modifier-form 'comp-async-env-modifier-form)
-  (defvaralias 'native-comp-async-all-done-hook 'comp-async-all-done-hook)
-  (defvaralias 'native-comp-async-cu-done-functions 'comp-async-cu-done-functions)
-  (defvaralias 'native-comp-async-jobs-number 'comp-async-jobs-number)
-  (defvaralias 'native-comp-never-optimize-functions 'comp-never-optimize-functions)
-  (defvaralias 'native-comp-bootstrap-deny-list 'comp-bootstrap-deny-list)
-  (defvaralias 'native-comp-always-compile 'comp-always-compile)
-  (defvaralias 'native-comp-verbose 'comp-verbose)
-  (defvaralias 'native-comp-debug 'comp-debug)
-  (defvaralias 'native-comp-speed 'comp-speed)
-  (defalias 'native-comp-limple-mode #'comp-limple-mode))
+;; REVIEW Remove after a month
+(when EMACS28+
+  (mapc (lambda (varset)
+          (unless (boundp (car varset))
+            (defvaralias (car varset) (cdr varset))))
+        '((native-comp-deferred-compilation . comp-deferred-compilation)
+          (native-comp-deferred-compilation-deny-list . comp-deferred-compilation-deny-list)
+          (native-comp-eln-load-path . comp-eln-load-path)
+          (native-comp-warning-on-missing-source . comp-warning-on-missing-source)
+          (native-comp-driver-options . comp-native-driver-options)
+          (native-comp-async-query-on-exit . comp-async-query-on-exit)
+          (native-comp-async-report-warnings-errors . comp-async-report-warnings-errors)
+          (native-comp-async-env-modifier-form . comp-async-env-modifier-form)
+          (native-comp-async-all-done-hook . comp-async-all-done-hook)
+          (native-comp-async-cu-done-functions . comp-async-cu-done-functions)
+          (native-comp-async-jobs-number . comp-async-jobs-number)
+          (native-comp-never-optimize-functions . comp-never-optimize-functions)
+          (native-comp-bootstrap-deny-list . comp-bootstrap-deny-list)
+          (native-comp-always-compile . comp-always-compile)
+          (native-comp-verbose . comp-verbose)
+          (native-comp-debug . comp-debug)
+          (native-comp-speed . comp-speed))))
 
 ;; Don't store eln files in ~/.emacs.d/eln-cache (they are likely to be purged
 ;; when upgrading Doom).
@@ -179,20 +183,13 @@ users).")
 
 (with-eval-after-load 'comp
   ;; HACK Disable native-compilation for some troublesome packages
-  (mapc (apply-partially #'add-to-list 'comp-deferred-compilation-deny-list)
+  (mapc (apply-partially #'add-to-list 'native-comp-deferred-compilation-deny-list)
         (let ((local-dir-re (concat "\\`" (regexp-quote doom-local-dir))))
           (list (concat "\\`" (regexp-quote doom-autoloads-file) "\\'")
                 (concat local-dir-re ".*/evil-collection-vterm\\.el\\'")
                 (concat local-dir-re ".*/with-editor\\.el\\'")
                 ;; https://github.com/nnicandro/emacs-jupyter/issues/297
-                (concat local-dir-re ".*/jupyter-channel\\.el\\'"))))
-  ;; Default to using all cores, rather than half of them, since we compile
-  ;; things ahead-of-time in a non-interactive session.
-  (defun doom--comp-use-all-cores-a ()
-    (if (zerop native-comp-async-jobs-number)
-        (setq comp-num-cpus (doom-system-cpus))
-      native-comp-async-jobs-number))
-  (advice-add #'comp-effective-async-max-jobs :override #'doom--comp-use-all-cores-a))
+                (concat local-dir-re ".*/jupyter-channel\\.el\\'")))))
 
 
 ;;
@@ -519,8 +516,6 @@ Meant to be used with `run-hook-wrapped'."
   (doom-log "Running doom hook: %s" hook)
   (condition-case-unless-debug e
       (funcall hook)
-    (user-error
-     (warn "Warning: %s" (error-message-string e)))
     (error
      (signal 'doom-hook-error (list hook e))))
   ;; return nil so `run-hook-wrapped' won't short circuit
@@ -534,7 +529,11 @@ Is used as advice to replace `run-hooks'."
         (run-hook-wrapped hook #'doom-run-hook)
       (doom-hook-error
        (unless debug-on-error
-         (lwarn hook :error "Error running hook %S because: %s" (cadr e) (caddr e)))
+         (lwarn hook :error "Error running hook %S because: %s"
+                (if (symbolp (cadr e))
+                    (symbol-name (cadr e))
+                  (cadr e))
+                (caddr e)))
        (signal 'doom-hook-error (cons hook (cdr e)))))))
 
 (defun doom-run-hook-on (hook-var trigger-hooks)

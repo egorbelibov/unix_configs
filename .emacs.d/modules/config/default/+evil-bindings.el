@@ -42,7 +42,8 @@
                            (bound-and-true-p yas-minor-mode)
                            (yas-maybe-expand-abbrev-key-filter 'yas-expand))
                       #'yas-expand
-                      (featurep! :completion company +tng)
+                      (and (bound-and-true-p company-mode)
+                           (featurep! :completion company +tng))
                       #'company-indent-or-complete-common)
       :m [tab] (cmds! (and (bound-and-true-p yas-minor-mode)
                            (evil-visual-state-p)
@@ -488,7 +489,7 @@
        :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
        :desc "From evil register"            "r"   #'evil-ex-registers
        :desc "Snippet"                       "s"   #'yas-insert-snippet
-       :desc "Unicode"                       "u"   #'unicode-chars-list-chars
+       :desc "Unicode"                       "u"   #'insert-char
        :desc "From clipboard"                "y"   #'+default/yank-pop)
 
       ;;; <leader> n --- notes
