@@ -68,7 +68,7 @@ list remains lean."
     "git" "log" "--oneline" "--no-merges"
     "-n" "26" end-ref (concat "^" (regexp-quote start-ref)))
    (if success
-       (let* ((output (string-trim-right stdout))
+       (let* ((output (string-trim-right (or stdout "")))
               (lines (split-string output "\n")))
          (if (> (length lines) 25)
              (concat (string-join (butlast lines 1) "\n") "\n[...]")
@@ -220,7 +220,7 @@ list remains lean."
            with previous = 0
            while (not (zerop pending))
            if (/= previous pending) do
-           (print! (info "\033[KWaiting for %d async jobs...\033[1A" pending))
+           (print! (start "\033[KNatively compiling %d files...\033[1A" pending))
            (setq previous pending)
            else do
            (let ((inhibit-message t))
@@ -332,13 +332,12 @@ declaration) or dependency thereof that hasn't already been."
                          (want-native-compile
                           (or (eq build t)
                               (memq 'native-compile build))))
-                    (when (eq (car-safe build) :not)
-                      (setq want-byte-compile (not want-byte-compile)
-                            want-native-compile (not want-native-compile)))
-                    (unless (and (require 'comp nil t)
-                                 (featurep 'nativecomp)
-                                 (ignore-errors (native-comp-available-p)))
-                      (setq want-native-compile nil))
+                    (and (eq (car-safe build) :not)
+                         (setq want-byte-compile (not want-byte-compile)
+                               want-native-compile (not want-native-compile)))
+                    (or (and (require 'comp nil t)
+                             (ignore-errors (native-comp-available-p)))
+                        (setq want-native-compile nil))
                     (and (or want-byte-compile want-native-compile)
                          (or (file-newer-than-file-p repo-dir build-dir)
                              (file-exists-p (straight--modified-dir (or local-repo package)))

@@ -1,5 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; ui/doom/packages.el
 
-(package! doom-themes :pin "4199e74db170200995ee8dfbb55ffae004d6e219")
-(package! solaire-mode :pin "9d143db85428c5a7798e429f3b8abd2bf3f80747")
+(package! doom-themes :pin "13d23777d43624e261742ac6911db874a095d31c")
+(package! solaire-mode :pin "186f97d7dddc85131fb1e7be5f89de226f26ae51")

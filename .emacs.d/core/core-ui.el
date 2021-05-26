@@ -414,8 +414,8 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
   ;;      which users expect to control hl-line in Emacs.
   (define-globalized-minor-mode global-hl-line-mode hl-line-mode
     (lambda ()
-      (and (not hl-line-mode)
-           (cond ((null global-hl-line-modes) nil)
+      (and (cond (hl-line-mode nil)
+                 ((null global-hl-line-modes) nil)
                  ((eq global-hl-line-modes t))
                  ((eq (car global-hl-line-modes) 'not)
                   (not (derived-mode-p global-hl-line-modes)))
@@ -590,6 +590,9 @@ windows, switch to `doom-fallback-buffer'. Otherwise, delegate to original
                    `((fixed-pitch-serif ((t (:font ,doom-serif-font))))))
                  (when doom-variable-pitch-font
                    `((variable-pitch ((t (:font ,doom-variable-pitch-font))))))))
+  ;; Never save these settings to `custom-file'
+  (dolist (sym '(fixed-pitch fixed-pitch-serif variable-pitch))
+    (put sym 'saved-face nil))
   (cond
    (doom-font
     ;; I avoid `set-frame-font' at startup because it is expensive; doing extra,
