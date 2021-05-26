@@ -4,8 +4,8 @@
 (def-doom-theme eb-white "A light theme inspired by Solarized light"
   ;; name        default   256       16
   (
-   (bg         '("#F3F3F3" nil       nil            ))
-   (bg-alt     '("#F6F6F6" nil       nil            ))
+   (bg         '("#F3F3F3" "F3F3F3"  "white"        ))
+   (bg-alt     '("#F5F5F5" "F5F5F5"  "white"        ))
    (base0      '("#F1F1F1" "black"   "black"        ))
    (base1      '("#EEEEEE" "#EEEEEE" "brightblack"  ))
    (base2      '("#F1F1F1" "#F1F1F1" "brightblack"  ))
