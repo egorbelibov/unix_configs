@@ -7,20 +7,20 @@
    (bg         '("#F3F3F3" nil       nil            ))
    (bg-alt     '("#F6F6F6" nil       nil            ))
    (base0      '("#F1F1F1" "black"   "black"        ))
-   (base1      '("#EEEEEE" "#1e1e1e" "brightblack"  ))
-   (base2      '("#F1F1F1" "#2e2e2e" "brightblack"  ))
-   (base3      '("#DFDFDF" "#262626" "brightblack"  ))
-   (base4      '("#DCDCDC" "#3f3f3f" "brightblack"  ))
-   (base5      '("#D6D6D6" "#525252" "brightblack"  ))
-   (base6      '("#92A2AF" "#6b6b6b" "brightblack"  ))
-   (base7      '("#788484" "#979797" "brightblack"  ))
-   (base8      '("#626C6C" "#dfdfdf" "black"        ))
-   (fg         '("#556b72" "#2d2d2d" "black"        ))
-   (fg-alt     '("#7D9298" "#bfbfbf" "brightblack"  ))
+   (base1      '("#EEEEEE" "#EEEEEE" "brightblack"  ))
+   (base2      '("#F1F1F1" "#F1F1F1" "brightblack"  ))
+   (base3      '("#DFDFDF" "#DFDFDF" "brightblack"  ))
+   (base4      '("#DCDCDC" "#DCDCDC" "brightblack"  ))
+   (base5      '("#D6D6D6" "#D6D6D6" "brightblack"  ))
+   (base6      '("#92A2AF" "#92A2AF" "brightblack"  ))
+   (base7      '("#788484" "#788484" "brightblack"  ))
+   (base8      '("#626C6C" "#626C6C" "black"        ))
+   (fg         '("#556b72" "#556b72" "black"        ))
+   (fg-alt     '("#7D9298" "#7D9298" "brightblack"  ))
 
    (grey       base4)
-   (red        '("#dc322f" "#ff6655" "red"          ))
-   (orange     '("#556b72" "#556b72" "black"        ))
+   (red        '("#dc322f" "#dc322f" "red"          ))
+   (orange     '("#556b72" "#ff6655" "black"        ))
    (green      '("#556b72" "#556b72" "black"        ))
    (teal       '("#556b72" "#556b72" "black"        ))
    (yellow     '("#556b72" "#556b72" "black"        ))
@@ -62,7 +62,6 @@
   ;; --- Extra Faces Options ------------------------
   (
    (cursor :background fg)
-   (mc/cursor-bar-face :foreground "#ffffff")
 
    (lazy-highlight :background base3
                    :foreground fg)
@@ -88,7 +87,7 @@
                    :distant-foreground bg
                    :extend t)
 
-   (font-lock-comment-face :foreground comments :background bg 0.05)
+   (font-lock-comment-face :foreground comments)
    (font-lock-doc-face :inherit 'font-lock-comment-face :foreground doc-comments)
    (font-lock-keyword-face :weight 'bold :foreground keywords)
    (font-lock-constant-face :weight 'bold :foreground constants)
