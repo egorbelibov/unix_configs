@@ -10,6 +10,10 @@ export GPG_TTY=$(tty)
 # Vim Mode (ZSH)
 bindkey -v
 
+# Bindings
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+
 # Set-up $PATH
 PATH=/usr/bin:/bin:/usr/sbin:/sbin
 # add custom, local installations to PATH
@@ -18,8 +22,6 @@ PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
 PATH=/opt/local/bin:/opt/local/sbin:"$PATH"
 # Haskell Binaries
 PATH="$HOME/.local/bin:$PATH"
-# other
-PATH="$HOME/.emacs.d/bin:$PATH"
 export PATH
 
 # ghcup-env
